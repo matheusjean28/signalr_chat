@@ -6,6 +6,7 @@ import "../Styles/ChatMain.css";
 export default function ChatMain() {
   const [messageInput, setMessageInput] = useState('');
   const [recivedMessages, setRecivedMessages] = useState([]);
+  const [username, setUsername] = useState('');
   const { sendJsonMessage, lastJsonMessage } = useWebSocket(
     "ws://localhost:5146"
   );
@@ -14,13 +15,13 @@ export default function ChatMain() {
     if (lastJsonMessage && lastJsonMessage.text) {
       setRecivedMessages((prevMessages) => [
         ...prevMessages,
-        lastJsonMessage.text,
+        { text: lastJsonMessage.text, username: lastJsonMessage.username }
       ]);
     }
   }, [lastJsonMessage]);
 
   const sendMessage = () => {
-    const message = { text: messageInput };
+    const message = { text: messageInput, username };
     try {
       sendJsonMessage(message);
       setRecivedMessages((prevMessages) => [...prevMessages]);
@@ -47,6 +48,7 @@ export default function ChatMain() {
             value={messageInput}
             onChange={(e) => handleInputMessage(e)}
           />
+          
           <button className="sendMessageButton" onClick={sendMessage}>
             Send
           </button>
