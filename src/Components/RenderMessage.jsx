@@ -1,19 +1,17 @@
-import { useContext } from "react";
-import AppContext from '../Context/AppContext'
-import useWebSocket from "react-use-websocket";
-import '../Styles/RenderMessage.css'
-export default function RenderMessage() {
-  const { lastJsonMessage, readyState } = useWebSocket(
-    "ws://localhost:5146"
-  );
+import React from "react";
+import "../Styles/RenderMessage.css";
 
-
+const RenderMessage = ({ recivedMessages }) => {
   return (
-    <>
-      <div className="RenderMessageConteiner">
-        
-        <h4>You: {lastJsonMessage && lastJsonMessage.text}</h4>
-      </div>
-    </>
+    <ul className="RenderMessageConteiner">
+      <h4>You: </h4>
+      {recivedMessages.map((message, index) => (
+        <li className="RenderMessageLi ">
+        <h5 className="RenderMessageH5" key={index}>{message}</h5>
+        </li>
+      ))}
+    </ul>
   );
-}
+};
+
+export default RenderMessage;

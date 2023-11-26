@@ -3,4 +3,30 @@ display: flex;
 flex-direction: column;
 position: relative;
 color: black;
+
+scroll-behavior: smooth;
+overflow: scroll;
+overflow-x: hidden;
+
+max-height: 520px;
+height: 100%;
+
+}
+.RenderMessageConteiner ul, li{
+    list-style: none;
+    text-decoration: none;
+}
+
+.RenderMessageLi{
+    display: flex;
+    place-items: center;
+    height: auto; 
+    word-wrap: break-word;
+    overflow-wrap: break-word; 
+    max-width: 450px; 
+    width: 100%;
+    margin-bottom: 5px; 
+}
+.RenderMessageH5{
+    width: 100%;
 }
