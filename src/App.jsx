@@ -6,14 +6,16 @@ import Profile from './Components/Profile'
 import './App.css'
 
 function App() {
+  const [username, setUsername] = useState('');
+  
   return (
     <>
-    {/* <AppContext.Provider value={}> */}
+    <AppContext.Provider value={{username,setUsername}}>
     <div className="MainGrid">  
       <ChatMain />
       <Profile />
     </div>
-    {/* </AppContext.Provider> */}
+    </AppContext.Provider>
     </>
   )
 }

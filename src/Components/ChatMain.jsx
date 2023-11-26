@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import useWebSocket from "react-use-websocket";
 import RenderMessage from "./RenderMessage";
 import "../Styles/ChatMain.css";
+import AppContext from "../Context/AppContext";
 
 export default function ChatMain() {
+  const {username, setUsername} = useContext(AppContext);
+
   const [messageInput, setMessageInput] = useState('');
   const [recivedMessages, setRecivedMessages] = useState([]);
-  const [username, setUsername] = useState('');
   const { sendJsonMessage, lastJsonMessage } = useWebSocket(
     "ws://localhost:5146"
   );
@@ -24,6 +26,7 @@ export default function ChatMain() {
     const message = { text: messageInput, username };
     try {
       sendJsonMessage(message);
+      console.log(username)
       setRecivedMessages((prevMessages) => [...prevMessages]);
       setMessageInput('');
     } catch (error) {

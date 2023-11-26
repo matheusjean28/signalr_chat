@@ -3,4 +3,23 @@
     height: 100%;
     border-radius: 8px;
     padding: 0 5px;
+
+    display:  flex;
+    place-items: center;
+    flex-direction: column;
+}
+
+.userNameInput {
+    padding: 5px;
+    border-radius: 5px;
+    color: black;
+    font-weight: 500;
+}
+
+.changeUsernameInput{
+    padding: 5px;
+    border-radius: 5px;
+    color: black;
+    font-weight: 500;
+    margin-top: 10px;
 }
