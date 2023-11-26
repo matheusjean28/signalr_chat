@@ -1,23 +1,48 @@
-import React from 'react';
-import useWebSocket from 'react-use-websocket';
-import '../Styles/ChatMain.css';
+import React, { useState } from "react";
+import useWebSocket from "react-use-websocket";
+import RenderMessage from "./RenderMessage";
+import "../Styles/ChatMain.css";
 
 export default function ChatMain() {
-    const { sendJsonMessage, lastJsonMessage, readyState } = useWebSocket('wss://kaazing.com/echo');
+  const [messageInput, setMessageInput] = useState(String);
+  const { sendJsonMessage, lastJsonMessage, readyState } = useWebSocket(
+    "ws://localhost:5146"
+  );
 
-    const sendMessage = () => {
-        const message = { text: 'Hello, world!' };
-        sendJsonMessage(message);
-    };
+  const sendMessage = () => {
+    const message = { text: messageInput };
+    try {
+      sendJsonMessage(message);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-    console.log('WebSocket Ready State:', readyState);
+  const handleInputMessage = (e) => {
+    e.preventDefault();
+    setMessageInput(e.target.value);
+  };
 
-    return (
-        <>
-            <div className="ChatMainContainer">
-                <button onClick={sendMessage}>Enviar Mensagem</button>
-                <div>Última mensagem recebida: {lastJsonMessage && lastJsonMessage.text}</div>
+  return (
+    <>
+      <div className="ChatMainConteiner">
+        <RenderMessage />
+
+        <div className="SendArea">
+
+        <input
+          className="messageInput"
+          type="text"
+          placeholder="Text your message!"
+          onChange={(e) => {
+              handleInputMessage(e);
+            }}
+            />
+        <button className="sendMessageButton" onClick={sendMessage}>
+          Send
+        </button>
             </div>
-        </>
-    );
+      </div>
+    </>
+  );
 }
