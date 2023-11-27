@@ -1,15 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import "../Styles/RenderMessage.css";
+import AppContext from "../Context/AppContext";
 
 const RenderMessage = ({ recivedMessages }) => {
+  const { username, setUsername } = useContext(AppContext);
   return (
     <ul className="RenderMessageConteiner">
-      <h4>You: </h4>
       {recivedMessages.map((message, index) => (
-        <li className="RenderMessageLi ">
-        <h5 className="RenderMessageH5" key={index}>{message.username}</h5>
-
-        <h5 className="RenderMessageH5" key={index}>{message.text}</h5>
+        <li
+          className={`RenderMessageLi ${
+            username === message.username ? "CurrentUser" : "OtherUser"
+          }`}
+          key={index}
+        >
+          <h4>{username ? "You:" : `${message.username}:`}</h4>
+          <h5 className="RenderMessageH5">{message.text}</h5>
         </li>
       ))}
     </ul>

@@ -30,3 +30,24 @@ height: 100%;
 .RenderMessageH5{
     width: 100%;
 }
+
+.RenderMessageLi {
+    display: flex;
+    place-items: center;
+    word-wrap: break-word;
+    max-width: 500px;
+    margin-bottom: 5px;
+  }
+  
+  .RenderMessageLi.CurrentUser {
+    justify-content: flex-end;
+  }
+  
+  .RenderMessageLi.OtherUser {
+    justify-content: flex-start;
+  }
+  
+  .RenderMessageH5 {
+    margin-left: 10px; 
+  }
+  

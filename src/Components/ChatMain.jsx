@@ -26,7 +26,6 @@ export default function ChatMain() {
     const message = { text: messageInput, username };
     try {
       sendJsonMessage(message);
-      console.log(username)
       setRecivedMessages((prevMessages) => [...prevMessages]);
       setMessageInput('');
     } catch (error) {

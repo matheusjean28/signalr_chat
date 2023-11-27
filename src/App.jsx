@@ -6,7 +6,7 @@ import Profile from './Components/Profile'
 import './App.css'
 
 function App() {
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState('matheus');
   
   return (
     <>
