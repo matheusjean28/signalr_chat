@@ -8,15 +8,21 @@ const RenderMessage = ({ recivedMessages }) => {
     <ul className="RenderMessageConteiner">
       {recivedMessages.map((message, index) => (
         <li
-          className={`RenderMessageLi ${
-            username === message.username ? "CurrentUser" : "OtherUser"
-          }`}
+          className={ username === message.username ? "CurrentUser" : "OtherUser"}
           key={index}
         >
-          <h4>{username ? "You:" : `${message.username}:`}</h4>
+          <h4>
+            {username === message.username ? "You:" : `${message.username}:`}
+          </h4>
           <h5 className="RenderMessageH5">{message.text}</h5>
         </li>
       ))}
+      <li className="CurrentUser">
+        <h4>teste</h4>
+      </li>
+      <li className="OtherUser">
+        <h4>teste</h4>
+      </li>
     </ul>
   );
 };

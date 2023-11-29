@@ -5,10 +5,10 @@ import "../Styles/ChatMain.css";
 import AppContext from "../Context/AppContext";
 
 export default function ChatMain() {
-  const {username, setUsername} = useContext(AppContext);
+  const { username, recivedMessages, setRecivedMessages } =
+    useContext(AppContext);
 
-  const [messageInput, setMessageInput] = useState('');
-  const [recivedMessages, setRecivedMessages] = useState([]);
+  const [messageInput, setMessageInput] = useState("");
   const { sendJsonMessage, lastJsonMessage } = useWebSocket(
     "ws://localhost:5146"
   );
@@ -17,19 +17,21 @@ export default function ChatMain() {
     if (lastJsonMessage && lastJsonMessage.text) {
       setRecivedMessages((prevMessages) => [
         ...prevMessages,
-        { text: lastJsonMessage.text, username: lastJsonMessage.username }
+        { text: lastJsonMessage.text, username: lastJsonMessage.username },
       ]);
     }
   }, [lastJsonMessage]);
 
   const sendMessage = () => {
-    const message = { text: messageInput, username };
-    try {
-      sendJsonMessage(message);
-      setRecivedMessages((prevMessages) => [...prevMessages]);
-      setMessageInput('');
-    } catch (error) {
-      console.error(error);
+    if (messageInput.trim() !== "") {
+      const message = { text: messageInput, username };
+
+      try {
+        sendJsonMessage(message);
+        setMessageInput("");
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
@@ -38,24 +40,25 @@ export default function ChatMain() {
   };
 
   return (
-    <>
-      <div className="ChatMainConteiner">
-        <RenderMessage recivedMessages={recivedMessages} />
+    <div className="ChatMainConteiner">
+      <RenderMessage
+        recivedMessages={recivedMessages}
+        currentUsername={username}
+      />
 
-        <div className="SendArea">
-          <input
-            className="messageInput"
-            type="text"
-            placeholder="Text your message!"
-            value={messageInput}
-            onChange={(e) => handleInputMessage(e)}
-          />
-          
-          <button className="sendMessageButton" onClick={sendMessage}>
-            Send
-          </button>
-        </div>
+      <div className="SendArea">
+        <input
+          className="messageInput"
+          type="text"
+          placeholder="Type your message!"
+          value={messageInput}
+          onChange={(e) => handleInputMessage(e)}
+        />
+
+        <button className="sendMessageButton" onClick={sendMessage}>
+          Send
+        </button>
       </div>
-    </>
+    </div>
   );
 }

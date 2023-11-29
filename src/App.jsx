@@ -7,10 +7,11 @@ import './App.css'
 
 function App() {
   const [username, setUsername] = useState('matheus');
+  const [recivedMessages, setRecivedMessages] = useState([]);
   
   return (
     <>
-    <AppContext.Provider value={{username,setUsername}}>
+    <AppContext.Provider value={{username,setUsername, recivedMessages, setRecivedMessages}}>
     <div className="MainGrid">  
       <ChatMain />
       <Profile />
