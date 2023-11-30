@@ -10,8 +10,7 @@ export default function ChatMain() {
 
   const [messageInput, setMessageInput] = useState("");
   const { sendJsonMessage, lastJsonMessage } = useWebSocket(
-    "ws://localhost:5146"
-  );
+    "ws://localhost:5146/api/chat"  );
 
   useEffect(() => {
     if (lastJsonMessage && lastJsonMessage.text) {
