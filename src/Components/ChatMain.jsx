@@ -9,12 +9,13 @@ export default function ChatMain() {
     useContext(AppContext);
 
   const [messageInput, setMessageInput] = useState("");
-  const { sendJsonMessage, readyState , lastJsonMessage } = useWebSocket(
-    "ws://localhost:5146/api/chat"  );
+  const { sendJsonMessage, readyState, lastJsonMessage } = useWebSocket(
+    "ws://localhost:5146/api/chat?name=name"
+  );
 
   useEffect(() => {
     if (readyState === WebSocket.OPEN) {
-      console.log('WebSocket conectado');
+      console.log("WebSocket conectado");
     }
     if (lastJsonMessage && lastJsonMessage.text) {
       setRecivedMessages((prevMessages) => [
@@ -23,7 +24,7 @@ export default function ChatMain() {
       ]);
     }
     if (readyState === WebSocket.CLOSED) {
-      console.log('WebSocket desconectado');
+      console.log("WebSocket desconectado");
     }
   }, [lastJsonMessage]);
 
