@@ -2,6 +2,7 @@ import { useState } from 'react'
 import AppContext from './Context/AppContext'
 import ChatMain from './Components/ChatMain'
 import Profile from './Components/Profile'
+import WebSocketDemo from './Components/Demo.Component'
 import './App.css'
 
 function App() {
@@ -12,8 +13,10 @@ function App() {
     <>
     <AppContext.Provider value={{username,setUsername, recivedMessages, setRecivedMessages}}>
     <div className="MainGrid">  
-      <ChatMain />
+      {/* <ChatMain /> */}
+      <WebSocketDemo/>
       <Profile />
+
     </div>
     </AppContext.Provider>
     </>
