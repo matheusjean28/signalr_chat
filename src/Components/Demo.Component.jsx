@@ -3,6 +3,7 @@ import * as signalR from '@microsoft/signalr';
 
 const WebSocketDemo = () => {
   const [connection, setConnection] = useState(null);
+  const [mensagens, setMensagens] = useState([]);
 
   useEffect(() => {
     const newConnection = new signalR.HubConnectionBuilder()
@@ -11,7 +12,8 @@ const WebSocketDemo = () => {
       .build();
 
     newConnection.on("ReceberMensagem", (usuario, mensagem) => {
-      console.log(`${usuario}: ${mensagem}`);
+      const novaMensagem = `${usuario}: ${mensagem}`;
+      setMensagens([...mensagens, novaMensagem]);
     });
 
     setConnection(newConnection);
@@ -29,23 +31,7 @@ const WebSocketDemo = () => {
         newConnection.stop();
       }
     };
-  }, []);
-
-  useEffect(() => {
-    if (connection) {
-      connection.onclose((error) => {
-        console.error('Conexão fechada:', error);
-      });
-
-      connection.onreconnecting(() => {
-        console.log('Reconectando...');
-      });
-
-      connection.onreconnected(() => {
-        console.log('Reconectado!');
-      });
-    }
-  }, [connection]);
+  }, [mensagens]);
 
   const enviarMensagem = () => {
     if (connection && connection.state === signalR.HubConnectionState.Connected) {
@@ -60,6 +46,11 @@ const WebSocketDemo = () => {
   return (
     <div>
       <h1>WebSocket Demo</h1>
+      <div>
+        {mensagens.map((mensagem, index) => (
+          <div key={index}>{mensagem}</div>
+        ))}
+      </div>
       <button onClick={enviarMensagem}>Enviar Mensagem</button>
     </div>
   );
