@@ -3,43 +3,13 @@ import useWebSocket from "react-use-websocket";
 import RenderMessage from "./RenderMessage";
 import "../Styles/ChatMain.css";
 import AppContext from "../Context/AppContext";
+import WebSocketDemo from "./Demo.Component";
 
 export default function ChatMain() {
   const { username, recivedMessages, setRecivedMessages } =
     useContext(AppContext);
 
   const [messageInput, setMessageInput] = useState("");
-  const { sendJsonMessage, readyState, lastJsonMessage } = useWebSocket(
-    "ws://localhost:5146/api/chat?name=name"
-  );
-
-  useEffect(() => {
-    if (readyState === WebSocket.OPEN) {
-      console.log("WebSocket conectado");
-    }
-    if (lastJsonMessage && lastJsonMessage.text) {
-      setRecivedMessages((prevMessages) => [
-        ...prevMessages,
-        { text: lastJsonMessage.text, username: lastJsonMessage.username },
-      ]);
-    }
-    if (readyState === WebSocket.CLOSED) {
-      console.log("WebSocket desconectado");
-    }
-  }, [lastJsonMessage]);
-
-  const sendMessage = () => {
-    if (messageInput.trim() !== "") {
-      const message = { text: messageInput, username };
-
-      try {
-        sendJsonMessage(message);
-        setMessageInput("");
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  };
 
   const handleInputMessage = (e) => {
     setMessageInput(e.target.value);
@@ -61,7 +31,7 @@ export default function ChatMain() {
           onChange={(e) => handleInputMessage(e)}
         />
 
-        <button className="sendMessageButton" onClick={sendMessage}>
+        <button className="sendMessageButton" >
           Send
         </button>
       </div>

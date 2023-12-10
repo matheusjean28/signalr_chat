@@ -1,44 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import * as signalR from '@microsoft/signalr';
-import { object } from 'prop-types';
+import React, { useContext, useState, useEffect } from "react";
+import * as signalR from "@microsoft/signalr";
+import AppContext from "../Context/AppContext";
 
 const WebSocketDemo = () => {
-  const [connection, setConnection] = useState(null);
+  const { connection, recivedMessages, setRecivedMessages } = useContext(AppContext);
   const [mensagens, setMensagens] = useState([]);
 
   useEffect(() => {
-    const newConnection = new signalR.HubConnectionBuilder()
-      .withUrl("http://localhost:5178/chatHub")
-      .configureLogging(signalR.LogLevel.Information)
-      .build();
+    if (!connection) return;
 
-    newConnection.on("ReceberMensagem", (usuario, mensagem) => {
+    connection.on("ReceberMensagem", (usuario, mensagem) => {
       setMensagens((prevMensagens) => [...prevMensagens, `${usuario}: ${mensagem}`]);
+      setRecivedMessages((prevMensagens) => [...prevMensagens, `${usuario}: ${mensagem}`])
     });
-    setConnection(newConnection);
-
-    newConnection.start()
-      .then(() => {
-        console.log('Conectado ao hub!');
-      })
-      .catch((error) => {
-        console.error('Erro ao conectar ao hub:', error);
-      });
 
     return () => {
-      if (newConnection) {
-        newConnection.stop();
-      }
-      console.log(Object.values(mensagens))
     };
-  }, [mensagens]);
+  }, [connection]);
 
   const enviarMensagem = () => {
     if (connection && connection.state === signalR.HubConnectionState.Connected) {
       connection
-        .invoke('EnviarMensagem', 'matheus', 'Olá, mundo!')
+        .invoke("EnviarMensagem", "matheus", "Olá, mundo!")
         .catch((error) => {
-          console.error('Erro ao enviar mensagem:', error);
+          console.error("Erro ao enviar mensagem:", error);
         });
     }
   };
