@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import * as signalR from '@microsoft/signalr';
+import { object } from 'prop-types';
 
 const WebSocketDemo = () => {
   const [connection, setConnection] = useState(null);
@@ -12,10 +13,8 @@ const WebSocketDemo = () => {
       .build();
 
     newConnection.on("ReceberMensagem", (usuario, mensagem) => {
-      const novaMensagem = `${usuario}: ${mensagem}`;
-      setMensagens([...mensagens, novaMensagem]);
+      setMensagens((prevMensagens) => [...prevMensagens, `${usuario}: ${mensagem}`]);
     });
-
     setConnection(newConnection);
 
     newConnection.start()
@@ -30,6 +29,7 @@ const WebSocketDemo = () => {
       if (newConnection) {
         newConnection.stop();
       }
+      console.log(Object.values(mensagens))
     };
   }, [mensagens]);
 
