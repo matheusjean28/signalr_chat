@@ -10,16 +10,19 @@ export default function ChatMain() {
     useContext(AppContext);
 
   const [messageInput, setMessageInput] = useState("");
- 
+
   const enviarMensagem = (e) => {
     e.preventDefault();
-  
-    if (messageInput.trim() === '') {
+
+    if (messageInput.trim() === "") {
       console.error("Message cannot be empyt");
       return;
     }
-  
-    if (connection && connection.state === signalR.HubConnectionState.Connected) {
+
+    if (
+      connection &&
+      connection.state === signalR.HubConnectionState.Connected
+    ) {
       connection
         .invoke("EnviarMensagem", username, messageInput)
         .catch((error) => {
@@ -28,16 +31,13 @@ export default function ChatMain() {
       setMessageInput("");
     }
   };
-  
-  
 
   const handleInputMessage = (e) => {
-      setMessageInput(e.target.value);
+    setMessageInput(e.target.value);
   };
 
   return (
     <div className="ChatMainConteiner">
-     
       <div className="SendArea">
         <input
           className="messageInput"
@@ -47,9 +47,14 @@ export default function ChatMain() {
           onChange={(e) => handleInputMessage(e)}
         />
 
-        <button className="sendMessageButton" onClick={(e) => {
-          enviarMensagem(e)
-        }}>Send</button>
+        <button
+          className="sendMessageButton"
+          onClick={(e) => {
+            enviarMensagem(e);
+          }}
+        >
+          Send
+        </button>
       </div>
     </div>
   );

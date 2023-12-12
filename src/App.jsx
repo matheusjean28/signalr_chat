@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import AppContext from "./Context/AppContext";
 import RenderAllMessages from "./Components/RenderAllMessages";
-import RenderMessage from "./Components/RenderMessage";
-import ChatMain from "./Components/ChatMain";
 import Profile from "./Components/Profile";
 import * as signalR from "@microsoft/signalr";
 import "./App.css";

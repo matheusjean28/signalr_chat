@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import ChatMain from "./ChatMain";
 import AppContext from "../Context/AppContext";
-import "../Styles/RenderAllMessages.css";
+import "../Styles/RenderMessage.css";
 
 const RenderAllMessages = () => {
   const { connection, recivedMessages, setRecivedMessages } =
@@ -12,31 +12,25 @@ const RenderAllMessages = () => {
     if (!connection) return;
 
     connection.on("ReceberMensagem", (usuario, mensagem) => {
-      setMensagens((prevMensagens) => [
-        ...prevMensagens,
-        `${usuario}: ${mensagem}`,
-      ]);
-      setRecivedMessages((prevMensagens) => [
-        ...prevMensagens,
-        `${usuario}: ${mensagem}`,
-      ]);
+      var objMessage = { user: usuario, userMessage: mensagem };
+
+      console.log(Object.keys(objMessage));
+      setMensagens((prevMensagens) => [...prevMensagens, objMessage]);
+      setRecivedMessages((prevMensagens) => [...prevMensagens, objMessage]);
     });
 
     return () => {};
   }, [connection]);
 
   return (
-    <div className="ConteinerDemo">
-      <h1>Chat Demo</h1>
-      <h3>The Guris</h3>
-      <div>
-        {console.log(mensagens)}
-        {mensagens.map((mensagem, index) => (
-          <div key={index}>{mensagem}</div>
-        ))}
-      </div>
-          <ChatMain/>
-    </div>
+    <ul className="RenderMessageConteiner">
+      {mensagens.map(({ user, userMessage, index }) => (
+        <li key={index}>
+          {user} : {userMessage}
+        </li>
+      ))}
+      <ChatMain />
+    </ul>
   );
 };
 
