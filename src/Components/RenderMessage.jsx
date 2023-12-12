@@ -1,12 +1,34 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
+import ChatMain from "./ChatMain";
 import "../Styles/RenderMessage.css";
 import AppContext from "../Context/AppContext";
 
-const RenderMessage = ({ recivedMessages }) => {
+const RenderMessage = () => {
+  const { connection, recivedMessages, setRecivedMessages } =
+    useContext(AppContext);
+  const [mensagens, setMensagens] = useState([]);
   const { username, setUsername } = useContext(AppContext);
+  useEffect(() => {
+    if (!connection) return;
+
+    connection.on("ReceberMensagem", (usuario, mensagem) => {
+      setMensagens((prevMensagens) => [
+        ...prevMensagens,
+        `${usuario}: ${mensagem}`,
+      ]);
+      setRecivedMessages((prevMensagens) => [
+        ...prevMensagens,
+        `${usuario}: ${mensagem}`,
+      ]);
+    });
+
+    return () => {};
+  }, [connection]);
+
+
   return (
     <ul className="RenderMessageConteiner">
-      {recivedMessages.map((message, index) => (
+      {mensagens.map((message, index) => (
         <li
           className={ username === message.username ? "CurrentUser" : "OtherUser"}
           key={index}
@@ -23,6 +45,7 @@ const RenderMessage = ({ recivedMessages }) => {
       <li className="OtherUser">
         <h4>teste</h4>
       </li>
+      <ChatMain/>
     </ul>
   );
 };

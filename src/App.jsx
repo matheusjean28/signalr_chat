@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import AppContext from "./Context/AppContext";
+import RenderAllMessages from "./Components/RenderAllMessages";
+import RenderMessage from "./Components/RenderMessage";
 import ChatMain from "./Components/ChatMain";
 import Profile from "./Components/Profile";
-import * as signalR from "@microsoft/signalr"
+import * as signalR from "@microsoft/signalr";
 import "./App.css";
 
 function App() {
@@ -33,25 +35,23 @@ function App() {
       }
     };
   }, [setConnection]);
-  
 
   return (
-      <AppContext.Provider
-        value={{
-          connection,
-          setConnection,
-          username,
-          setUsername,
-          recivedMessages,
-          setRecivedMessages,
-        }}
-      >
-        <div className="MainGrid">
-          {/* <WebSocketDemo /> */}
-          <ChatMain />
-          <Profile />
-        </div>
-      </AppContext.Provider>
+    <AppContext.Provider
+      value={{
+        connection,
+        setConnection,
+        username,
+        setUsername,
+        recivedMessages,
+        setRecivedMessages,
+      }}
+    >
+      <div className="MainGrid">
+        <RenderAllMessages/>
+        <Profile />
+      </div>
+    </AppContext.Provider>
   );
 }
 

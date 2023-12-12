@@ -1,27 +1,43 @@
 import React, { useContext, useEffect, useState } from "react";
-import useWebSocket from "react-use-websocket";
 import RenderMessage from "./RenderMessage";
+import * as signalR from "@microsoft/signalr";
+
 import "../Styles/ChatMain.css";
 import AppContext from "../Context/AppContext";
-import WebSocketDemo from "./Demo.Component";
 
 export default function ChatMain() {
-  const { username, recivedMessages, setRecivedMessages } =
+  const { connection, username, recivedMessages, setRecivedMessages } =
     useContext(AppContext);
 
   const [messageInput, setMessageInput] = useState("");
+ 
+  const enviarMensagem = (e) => {
+    e.preventDefault();
+  
+    if (messageInput.trim() === '') {
+      console.error("Message cannot be empyt");
+      return;
+    }
+  
+    if (connection && connection.state === signalR.HubConnectionState.Connected) {
+      connection
+        .invoke("EnviarMensagem", username, messageInput)
+        .catch((error) => {
+          console.error("Erro :", error);
+        });
+      setMessageInput("");
+    }
+  };
+  
+  
 
   const handleInputMessage = (e) => {
-    setMessageInput(e.target.value);
+      setMessageInput(e.target.value);
   };
 
   return (
     <div className="ChatMainConteiner">
-      <RenderMessage
-        recivedMessages={recivedMessages}
-        currentUsername={username}
-      />
-
+     
       <div className="SendArea">
         <input
           className="messageInput"
@@ -31,9 +47,9 @@ export default function ChatMain() {
           onChange={(e) => handleInputMessage(e)}
         />
 
-        <button className="sendMessageButton" >
-          Send
-        </button>
+        <button className="sendMessageButton" onClick={(e) => {
+          enviarMensagem(e)
+        }}>Send</button>
       </div>
     </div>
   );
