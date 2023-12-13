@@ -26,6 +26,7 @@ const RenderAllMessages = () => {
   return (
     <ul className="RenderMessageConteiner">
       {mensagens.map(({ user, userMessage, index }) => (
+        
         <li
           key={index}
           className={user === username ? "CurrentUser" : "OtherUser"}
@@ -41,8 +42,10 @@ const RenderAllMessages = () => {
               <h5 className="RenderMessageOther">{userMessage}</h5>
             </div>
           )}
+          
         </li>
       ))}
+     
       <ChatMain />
     </ul>
   );

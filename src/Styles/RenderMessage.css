@@ -11,46 +11,29 @@
   max-height: 600px;
   height: 100%;
 }
+
 .RenderMessageConteiner::-webkit-scrollbar {
   display: none;
 }
+
 .RenderMessageConteiner ul,
 li {
   list-style: none;
   text-decoration: none;
 }
 
-.RenderMessageLi {
-  display: flex;
-  place-items: center;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  max-width: 450px;
-  width: 100%;
-}
-
-.RenderMessageLi {
-  display: flex;
-  word-wrap: break-word;
-  max-width: 500px;
-}
 /*Other user side */
 .OtherUser {
-  display:  flex;
+  display: flex;
   flex-direction: column;
   text-align: left;
-  margin: 0;
-  
-
 }
 
 .OtherUserSide {
-  background-color: aqua;
   display: flex;
   flex-direction: column;
   word-wrap: break-word;
   max-width: 500px;
-  height: auto;
   text-align: left;
 }
 .RenderMessageOther {
@@ -59,37 +42,42 @@ li {
   flex-direction: column;
   word-wrap: break-word;
   max-width: 500px;
-  height: auto;
   place-content: center;
+  text-align: left;
 }
 .RenderMessageOther > h4,
-h5 {
+.RenderMessageOther > h5 {
   text-align: left;
-  margin-bottom: 5px;
   background-color: red;
 }
-
-
 
 /*current user*/
 .CurrentUser {
   display: flex;
+
   justify-content: flex-end;
   justify-items: flex-end;
 }
 .CurrentUserSide {
   display: flex;
+  place-content: center;
+  place-items: center;
+
+  height: 100px;
+  
   flex-direction: column;
   word-wrap: break-word;
   max-width: 500px;
-  height: auto;
-  place-content: center;
+}
+
+.CurrentUserSide > h4,
+.CurrentUserSide > h5 {
+  text-align: right ;
 }
 
 .UserSide > h4,
 h5 {
   text-align: right;
-  margin-bottom: 5px;
 }
 .RenderMessageYou {
   text-align: right;
