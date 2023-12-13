@@ -33,11 +33,17 @@ const RenderAllMessages = () => {
           key={index}
           className={user === username ? "CurrentUser" : "OtherUser"}
         >
-          <div className={user === username ? "CurrentUserSide" : "OtherUserSide"}>
+          <div
+            className={user === username ? "CurrentUserSide" : "OtherUserSide"}
+          >
             {user !== username && (
               <h4 className="RenderMessageOther">{user}</h4>
             )}
-            <h5 className={user === username ? "RenderMessageYou" : "RenderMessageOther"}>
+            <h5
+              className={
+                user === username ? "RenderMessageYou" : "RenderMessageOther"
+              }
+            >
               {shouldRenderYouLabel && user === username ? "You" : ""}
               {userMessage}
             </h5>

@@ -3,19 +3,19 @@
   flex-direction: column;
   position: relative;
   color: black;
-
   scroll-behavior: smooth;
   overflow: scroll;
   overflow-x: hidden;
-
-  max-height: 600px;
-  height: 100%;
+  max-height: 520px;
+  gap: 2px;
 }
+
 .RenderMessageConteiner::-webkit-scrollbar {
   display: none;
 }
+
 .RenderMessageConteiner ul,
-li {
+.RenderMessageConteiner li {
   list-style: none;
   text-decoration: none;
 }
@@ -25,69 +25,68 @@ li {
   place-items: center;
   word-wrap: break-word;
   overflow-wrap: break-word;
-  max-width: 450px;
+  max-width: 500px;
   width: 100%;
 }
 
-.RenderMessageLi {
-  display: flex;
-  word-wrap: break-word;
-  max-width: 500px;
-}
-/*Other user side */
+/* Other user side */
 .OtherUser {
-  display:  flex;
+  display: flex;
   flex-direction: column;
   text-align: left;
   margin: 0;
-  
-
 }
 
 .OtherUserSide {
+  background-color: rgb(228, 228, 228);
+  border-radius: 5px;
+  padding: 0 5px;
   display: flex;
-  flex-direction: column;
-  word-wrap: break-word;
-  max-width: 500px;
-  text-align: left;
-}
-.RenderMessageOther {
-  background-color: aqua;
+
   display: flex;
   flex-direction: column;
   word-wrap: break-word;
   max-width: 500px;
   place-content: center;
-  text-align: left;
-}
-.RenderMessageOther > h4,
-h5 {
-  text-align: left;
-  background-color: red;
+  
 }
 
+.RenderMessageOther {
+  display: flex;
+  flex-direction: column;
+  word-wrap: break-word;
+  max-width: 500px;
+  text-align: left;
+  
+}
 
-
-/*current user*/
+/* Current user */
 .CurrentUser {
   display: flex;
   justify-content: flex-end;
   justify-items: flex-end;
-  
 }
+
 .CurrentUserSide {
   display: flex;
   flex-direction: column;
   word-wrap: break-word;
   max-width: 500px;
   place-content: center;
+
+  background-color: aliceblue;
+  border-radius: 5px;
+  padding: 0 5px;
 }
 
 .UserSide > h4,
-h5 {
+.UserSide > h5,
+.RenderMessageYou > h4,
+.RenderMessageYou > h5 {
   text-align: right;
 }
+
 .RenderMessageYou {
-  text-align: right;
   margin-right: 10px;
+  text-align: right;
 }
