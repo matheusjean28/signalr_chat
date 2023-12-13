@@ -7,10 +7,11 @@
 
   flex-direction: column;
   bottom: 10px;
-  position: absolute;
+  position: fixed;
+  backdrop-filter: 10px;
 }
-.ChatMainConteiner::-webkit-scrollbar { 
-	display: none;
+.ChatMainConteiner::-webkit-scrollbar {
+  display: none;
 }
 
 .messageInput {
