@@ -11,22 +11,37 @@
   max-height: 600px;
   height: 100%;
 }
-
 .RenderMessageConteiner::-webkit-scrollbar {
   display: none;
 }
-
 .RenderMessageConteiner ul,
 li {
   list-style: none;
   text-decoration: none;
 }
 
+.RenderMessageLi {
+  display: flex;
+  place-items: center;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 450px;
+  width: 100%;
+}
+
+.RenderMessageLi {
+  display: flex;
+  word-wrap: break-word;
+  max-width: 500px;
+}
 /*Other user side */
 .OtherUser {
-  display: flex;
+  display:  flex;
   flex-direction: column;
   text-align: left;
+  margin: 0;
+  
+
 }
 
 .OtherUserSide {
@@ -46,33 +61,26 @@ li {
   text-align: left;
 }
 .RenderMessageOther > h4,
-.RenderMessageOther > h5 {
+h5 {
   text-align: left;
   background-color: red;
 }
 
+
+
 /*current user*/
 .CurrentUser {
   display: flex;
-
   justify-content: flex-end;
   justify-items: flex-end;
+  
 }
 .CurrentUserSide {
   display: flex;
-  place-content: center;
-  place-items: center;
-
-  height: 100px;
-  
   flex-direction: column;
   word-wrap: break-word;
   max-width: 500px;
-}
-
-.CurrentUserSide > h4,
-.CurrentUserSide > h5 {
-  text-align: right ;
+  place-content: center;
 }
 
 .UserSide > h4,
