@@ -1,14 +1,21 @@
 import { useEffect, useState } from "react";
-import AppContext from "./Context/AppContext";
-import RenderAllMessages from "./Components/RenderAllMessages";
 import Profile from "./Components/Profile";
 import * as signalR from "@microsoft/signalr";
+import AppContext from "./Context/AppContext";
+import RenderAllMessages from "./Components/RenderAllMessages";
+import Login from "./Components/Login";
+
 import "./App.css";
 
 function App() {
   const [username, setUsername] = useState("matheus");
   const [connection, setConnection] = useState(null);
   const [recivedMessages, setRecivedMessages] = useState([]);
+  const [login, setLogin] = useState({
+    name: String, 
+    email: String,
+    password: String,
+  });
 
   useEffect(() => {
     const newConnection = new signalR.HubConnectionBuilder()
@@ -37,6 +44,8 @@ function App() {
   return (
     <AppContext.Provider
       value={{
+        login,
+        setLogin,
         connection,
         setConnection,
         username,
@@ -45,10 +54,11 @@ function App() {
         setRecivedMessages,
       }}
     >
-      <div className="MainGrid">
-        <RenderAllMessages/>
+      <Login />
+      {/* <div className="MainGrid">
+        <RenderAllMessages />
         <Profile />
-      </div>
+      </div> */}
     </AppContext.Provider>
   );
 }
