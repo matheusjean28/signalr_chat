@@ -12,10 +12,11 @@ function App() {
   const [connection, setConnection] = useState(null);
   const [recivedMessages, setRecivedMessages] = useState([]);
   const [login, setLogin] = useState({
-    name: String, 
+    name: String,
     email: String,
     password: String,
   });
+  const [isLoged, setIsLoged] = useState(false);
 
   useEffect(() => {
     const newConnection = new signalR.HubConnectionBuilder()
@@ -39,11 +40,13 @@ function App() {
         newConnection.stop();
       }
     };
-  }, [setConnection]);
+  }, [setConnection, isLoged]);
 
   return (
     <AppContext.Provider
       value={{
+        isLoged,
+        setIsLoged,
         login,
         setLogin,
         connection,
@@ -54,11 +57,14 @@ function App() {
         setRecivedMessages,
       }}
     >
-      <Login />
-      {/* <div className="MainGrid">
-        <RenderAllMessages />
-        <Profile />
-      </div> */}
+      {isLoged ? (
+        <div className="MainGrid">
+          <RenderAllMessages />
+          <Profile />
+        </div>
+      ) : (
+        <Login />
+      )}
     </AppContext.Provider>
   );
 }
