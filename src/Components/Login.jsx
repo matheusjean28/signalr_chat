@@ -3,7 +3,7 @@ import React, { useState, useContext } from "react";
 import AnimationsContent from "./AnimationsContent";
 import AppContext from "../Context/AppContext";
 const Login = () => {
-  const { login, setLogin, isLoged, setIsLoged } = useContext(AppContext);
+  const { login, setLogin, isLoged, setIsLoged, setUsername} = useContext(AppContext);
   console.log(isLoged);
 
   const [loginCreadentials, setLoginCreadentials] = useState({
@@ -30,9 +30,8 @@ const Login = () => {
   };
 
   const handlerLogin = () => {
-    if (nameInput === "teste") {
-      setName(true);
-    }
+    // if (nameInput === "teste") {
+    //   setName(true);
     if (emailInput === "123456") {
       setPassword(true);
     }
@@ -41,9 +40,9 @@ const Login = () => {
     }
     console.log("here isLoged", isLoged.value);
 
-    setIsLoged(name && email && password);
+    setIsLoged( email && password);
   };
-
+  //check if username is right
   return (
     <React.Fragment>
       <div className="LoginConteiner">
@@ -60,7 +59,7 @@ const Login = () => {
             placeholder="User Name"
             onChange={(e) => {
               e.preventDefault();
-              setNameInput(e.target.value);
+              setUsername(e.target.value.trim());
             }}
           />
 
@@ -92,6 +91,7 @@ const Login = () => {
           </button>
           <button onClick={(e) => {
               e.preventDefault();
+              setUsername("<anonim user!>")
               setIsLoged(true);
             }} >Anonim Login</button>
         </form>

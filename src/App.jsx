@@ -8,7 +8,7 @@ import Login from "./Components/Login";
 import "./App.css";
 
 function App() {
-  const [username, setUsername] = useState("matheus");
+  const [username, setUsername] = useState("");
   const [connection, setConnection] = useState(null);
   const [recivedMessages, setRecivedMessages] = useState([]);
   const [login, setLogin] = useState({
