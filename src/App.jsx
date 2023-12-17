@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Profile from "./Components/Profile";
+import ChatRooms from "./Components/ChatRooms";
 import * as signalR from "@microsoft/signalr";
 import AppContext from "./Context/AppContext";
 import RenderAllMessages from "./Components/RenderAllMessages";
@@ -57,6 +58,8 @@ function App() {
         setRecivedMessages,
       }}
     >
+      <ChatRooms/>
+      
       {/* {isLoged ? (
         <div className="MainGrid">
           <RenderAllMessages />
