@@ -11,7 +11,7 @@ export default function AnimationsContent(){
             <div class="spinner1"></div>
           </div>
 
-          {/* animation area */}
+          {/* animation area here*/}
           <div class="loader">
             <div class="head"></div>
 
