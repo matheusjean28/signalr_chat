@@ -1,0 +1,99 @@
+.ChatRoomConteiner {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    height: 100%;
+
+    padding: 0 5px;
+}
+
+.ChatRoomLeft {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    height: 100%;
+
+    place-items: center;
+}
+
+.ChatListUl {
+    overflow: scroll;
+    scroll-behavior: smooth;
+    height: 100%;
+    width: 90%;
+    overflow-y: auto;
+
+    padding: 0;
+
+    list-style: none;
+    text-decoration: none;
+}
+.ChatListUl::-webkit-scrollbar {
+    display: none;
+}
+
+.ChatListLi {
+    display: flex;
+    place-items: center;
+    text-align: left;
+
+    border-radius: 10px;
+
+    height: 50px;
+    margin-bottom: 10px;
+    padding: 0 30px 0 5px;
+
+    background-color: rgb(142, 164, 183);
+
+    justify-content: space-between;
+}
+/* //it render a list with each picprofile from user that are in current chat
+//if this list contains more than 3 users, them show a 3+ user's */
+.UlUserInRoom {
+    padding: 0 30px;
+
+    display: flex;
+    text-decoration: none;
+    list-style: none;
+
+    place-content: center;
+    place-items: center;
+
+    height: 50px;
+}
+
+.LiUserInRoom {
+    padding: 0;
+    margin: 0;
+    height: 50px;
+    display: flex;
+    text-decoration: none;
+    list-style: none;
+
+    position: relative;
+
+    place-content: center;
+    place-items: center;
+}
+.ImgUserInRoom {
+    height: 30px;
+    width: 30px;
+
+    border-radius: 50%;
+    position: absolute;
+}
+.ImgUserInRoom:first-child {
+    left: 10%;
+    z-index: 1;
+}
+
+.ImgUserInRoom:nth-of-type(2) {
+    left: 22%;
+    z-index: 2;
+}
+
+.ChatListJoinButton {
+    padding: 3px 15px;
+    border-radius: 5px;
+    border: none;
+}
