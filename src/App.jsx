@@ -57,14 +57,14 @@ function App() {
         setRecivedMessages,
       }}
     >
-      {isLoged ? (
+      {/* {isLoged ? (
         <div className="MainGrid">
           <RenderAllMessages />
           <Profile />
         </div>
       ) : (
         <Login />
-      )}
+      )} */}
     </AppContext.Provider>
   );
 }
