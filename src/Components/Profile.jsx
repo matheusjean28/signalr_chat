@@ -3,7 +3,7 @@ import AppContext from "../Context/AppContext";
 import React, { useContext, useEffect, useState } from "react";
 
 export default function Profile() {
-  const { username, setUsername } = useContext(AppContext);
+  const { username, setUsername, isInARoom, setIsInARoom } = useContext(AppContext);
   const [user, setUser] = useState("");
   const handleUsername = (e) => {
     e.preventDefault();
@@ -30,6 +30,13 @@ export default function Profile() {
         >
           change
         </button>
+
+        <button
+        className="ProfileBackButton"
+          onClick={(e) => {
+            e.preventDefault()
+            setIsInARoom(false)
+          }} >{"<-"}</button>
       </div>
     </>
   );

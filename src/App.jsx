@@ -18,6 +18,7 @@ function App() {
     password: String,
   });
   const [isLoged, setIsLoged] = useState(false);
+  const [isInARoom, setIsInARoom] = useState(false)
 
   useEffect(() => {
     const newConnection = new signalR.HubConnectionBuilder()
@@ -41,11 +42,12 @@ function App() {
         newConnection.stop();
       }
     };
-  }, [setConnection, isLoged]);
+  }, [setConnection, isLoged, isInARoom]);
 
   return (
     <AppContext.Provider
       value={{
+        isInARoom, setIsInARoom,
         isLoged,
         setIsLoged,
         login,
@@ -58,16 +60,19 @@ function App() {
         setRecivedMessages,
       }}
     >
-      <ChatRooms/>
-      
-      {/* {isLoged ? (
-        <div className="MainGrid">
-          <RenderAllMessages />
-          <Profile />
-        </div>
+    {isLoged ? (
+        isInARoom ? (
+          <div className="MainGrid">
+            <RenderAllMessages />
+            <Profile />
+          </div>
+        ) : (
+          
+          <ChatRooms />
+        )
       ) : (
         <Login />
-      )} */}
+      )}
     </AppContext.Provider>
   );
 }
