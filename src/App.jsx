@@ -7,6 +7,7 @@ import RenderAllMessages from "./Components/RenderAllMessages";
 import Login from "./Components/Login";
 
 import "./App.css";
+import ChatMain from "./Components/ChatMain";
 
 function App() {
   const [username, setUsername] = useState("");
@@ -19,6 +20,7 @@ function App() {
   });
   const [isLoged, setIsLoged] = useState(false);
   const [isInARoom, setIsInARoom] = useState(false)
+  const [chatName,setChatName] = useState("Animals")
 
   useEffect(() => {
     const newConnection = new signalR.HubConnectionBuilder()
@@ -47,6 +49,7 @@ function App() {
   return (
     <AppContext.Provider
       value={{
+        chatName,setChatName, 
         isInARoom, setIsInARoom,
         isLoged,
         setIsLoged,
@@ -60,19 +63,24 @@ function App() {
         setRecivedMessages,
       }}
     >
-    {isLoged ? (
+           <div className="MainGrid">
+            <h2 className="MainGridChatName">{chatName}</h2>
+            <RenderAllMessages />
+            <Profile />
+          </div>
+    {/* {isLoged ? (
         isInARoom ? (
           <div className="MainGrid">
             <RenderAllMessages />
             <Profile />
           </div>
         ) : (
-          
-          <ChatRooms />
-        )
+           */}
+          {/* <ChatRooms /> */}
+        {/* )
       ) : (
         <Login />
-      )}
+      )} */}
     </AppContext.Provider>
   );
 }
