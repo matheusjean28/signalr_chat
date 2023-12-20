@@ -1,10 +1,9 @@
 .ChatRoomConteiner {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 5fr 2fr;
 
     height: 100%;
 
-    padding: 0 5px;
 }
 
 .ChatRoomLeft {

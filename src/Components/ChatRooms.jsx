@@ -1,6 +1,7 @@
 import '../Styles/ChatRooms.css'
 import React, { useContext } from 'react'
 import AppContext from '../Context/AppContext'
+import ProfileSettings from './ProfileSettings';
 
 
 const ChatRooms = () => {
@@ -61,9 +62,7 @@ const ChatRooms = () => {
 
                 </ul>
             </div>
-            <div className="">
-                <p>ok</p>
-            </div>
+            <ProfileSettings/>
         </div>
     )
 }

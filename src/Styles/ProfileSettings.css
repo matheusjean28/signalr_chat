@@ -1,0 +1,18 @@
+.ProfileConteiner {
+    display:  flex;
+    height: 100%;
+    
+    margin: 0;
+    flex-direction: column;
+
+    background-color: rgb(2, 147, 147);
+}
+
+.ProfilePicture {
+    height: 80px;
+    width: 80px;
+
+    border-radius: 50%;
+
+    border: none;
+}
