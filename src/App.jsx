@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Profile from "./Components/Profile";
 import ChatRooms from "./Components/ChatRooms";
 import * as signalR from "@microsoft/signalr";
 import AppContext from "./Context/AppContext";
@@ -8,6 +7,7 @@ import Login from "./Components/Login";
 
 import "./App.css";
 import ChatMain from "./Components/ChatMain";
+import ProfileSettings from "./Components/ProfileSettings";
 
 function App() {
   const [username, setUsername] = useState("");
@@ -74,7 +74,7 @@ function App() {
             <h2 className="MainGridChatName">{chatName}</h2>
 
             <RenderAllMessages />
-            <Profile />
+            <ProfileSettings />
           </div>
         ) : (
 

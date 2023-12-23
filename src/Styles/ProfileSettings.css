@@ -1,11 +1,27 @@
 .ProfileConteiner {
-    display:  flex;
+    position: relative;
+
+    display: flex;
     height: 100%;
-    
+
+    align-items: center;
+    gap: 0;
     margin: 0;
     flex-direction: column;
+    border-radius: 10px;
 
     background-color: rgb(2, 147, 147);
+}
+.ProfileBackButton {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+
+    font-weight: bolder;
+    text-align: center;
+
+    padding: 1px 5px;
+    border-radius: 10px;
 }
 
 .ProfilePicture {
@@ -15,4 +31,25 @@
     border-radius: 50%;
 
     border: none;
+}
+
+.BioContent {
+    display: flex;
+    place-content: center;
+    place-items: left;
+    padding: 0 30px;
+}
+
+.ProfileInfos {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
+
+
+.EditProfile {
+    display:  flex;
+
+    place-content: center;
+    place-items: center;
+    
 }
