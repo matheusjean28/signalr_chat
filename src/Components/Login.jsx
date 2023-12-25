@@ -3,7 +3,7 @@ import React, { useState, useContext } from "react";
 import AnimationsContent from "./AnimationsContent";
 import AppContext from "../Context/AppContext";
 const Login = () => {
-  const { login, setLogin, isLoged, setIsLoged, setUsername} = useContext(AppContext);
+  const { login, setLogin, isLoged, setIsLoged, setUsername,setUserInfo} = useContext(AppContext);
   console.log(isLoged);
 
   const [loginCreadentials, setLoginCreadentials] = useState({
@@ -40,6 +40,8 @@ const Login = () => {
     }
     console.log("here isLoged", isLoged.value);
 
+    // put herelocical to sync user info before logged
+    // setUserInfo(userinfo.userName)
     setIsLoged( email && password);
   };
   //check if username is right

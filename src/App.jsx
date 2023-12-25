@@ -4,9 +4,7 @@ import * as signalR from "@microsoft/signalr";
 import AppContext from "./Context/AppContext";
 import RenderAllMessages from "./Components/RenderAllMessages";
 import Login from "./Components/Login";
-
 import "./App.css";
-import ChatMain from "./Components/ChatMain";
 import ProfileSettings from "./Components/ProfileSettings";
 
 function App() {
@@ -21,6 +19,10 @@ function App() {
   const [isLoged, setIsLoged] = useState(false);
   const [isInARoom, setIsInARoom] = useState(false)
   const [chatName, setChatName] = useState("Animals")
+  const [userInfo, setUserInfo] = useState({
+    userName: username,
+    bio: "Lorem ipsum dolor sit, amet consectetur adipisicing elit.", 
+  })
 
   useEffect(() => {
     const newConnection = new signalR.HubConnectionBuilder()
@@ -49,6 +51,7 @@ function App() {
   return (
     <AppContext.Provider
       value={{
+        userInfo, setUserInfo,
         chatName, setChatName,
         isInARoom, setIsInARoom,
         isLoged,

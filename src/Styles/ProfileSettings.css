@@ -45,11 +45,27 @@
     grid-template-columns: 1fr 3fr;
 }
 
-
 .EditProfile {
-    display:  flex;
+    display: flex;
 
     place-content: center;
     place-items: center;
-    
+
+    padding: 5px 10px;
+    border-radius: 5px;
+
+    margin: 0;
+    gap: 10px;
+
+    background-color: gray;
+    border: 1px solid gray;
+}
+
+.EditProfileH5 {
+    padding: 0;
+    margin: 0;
+}
+.EditProfileImg {
+    display: flex;
+    width: 25px;
 }
