@@ -1,17 +1,18 @@
 import React, { useState, useContext } from 'react';
 import '../Styles/ProfileSettings.css'
+
 import AppContext from '../Context/AppContext.jsx';
+import EditProfileSettings from './EditProfileSettings.jsx';
 
 const ProfileSettings = () => {
-    const { username, setUsername, setIsInARoom, userInfo, setUserInfo } = useContext(AppContext);
-    const [isEditing, setIsEditing] =useState(false);
+    const { username, setUsername, setIsInARoom, userInfo, setUserInfo,isEditing, setIsEditing } = useContext(AppContext);
     return (<>
-        <div className="ProfileConteiner">
+       {!isEditing ? <div className="ProfileConteiner">
             <h3>PROFILE SETTINGS</h3>
             <img className='ProfilePicture' src="src/assets/astronaut.svg" alt="astronaut" />
             <h5>{username}</h5>
 
-            <h4>BIO:</h4>
+            <h4 className='ProfileConteinerH4Bio' >BIO:</h4>
             <h5 className='BioContent'>{userInfo.bio}</h5>
 
             {/* 
@@ -36,7 +37,7 @@ const ProfileSettings = () => {
                 <img className='EditProfileImg' src="src/assets/editar.png" alt="" />
             </button>
 
-        </div>
+        </div> : <EditProfileSettings/>}
     </>)
 }
 export default ProfileSettings;

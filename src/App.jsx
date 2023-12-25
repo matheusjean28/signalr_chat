@@ -21,8 +21,11 @@ function App() {
   const [chatName, setChatName] = useState("Animals")
   const [userInfo, setUserInfo] = useState({
     userName: username,
-    bio: "Lorem ipsum dolor sit, amet consectetur adipisicing elit.", 
+    picProfile: "src/assets/editar.png ",
+    bio: "Lorem ipsum dolor sit, amet consectetur adipisicing elit.",
   })
+  const [isEditing, setIsEditing] = useState(false);
+
 
   useEffect(() => {
     const newConnection = new signalR.HubConnectionBuilder()
@@ -51,6 +54,7 @@ function App() {
   return (
     <AppContext.Provider
       value={{
+        isEditing, setIsEditing,
         userInfo, setUserInfo,
         chatName, setChatName,
         isInARoom, setIsInARoom,
