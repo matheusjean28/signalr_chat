@@ -13,7 +13,7 @@ const ProfileSettings = () => {
             <h5>{username}</h5>
 
             <h4 className='ProfileConteinerH4Bio' >BIO:</h4>
-            <h5 className='BioContent'>{userInfo.bio}</h5>
+            <h5 className='BioContent'>userinfo</h5>
 
             {/* 
             this is for new features

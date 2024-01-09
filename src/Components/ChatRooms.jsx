@@ -5,7 +5,7 @@ import ProfileSettings from './ProfileSettings';
 
 
 const ChatRooms = () => {
-    const { isInARoom, setIsInARoom, chatName, setChatName } = useContext(AppContext);
+    const { isInARoom, setIsInARoom, chatName, setChatName,} = useContext(AppContext);
     return (
         <div className="ChatRoomConteiner">
             <div className="ChatRoomLeft">
