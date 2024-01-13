@@ -5,7 +5,7 @@ import ProfileSettings from './ProfileSettings';
 
 
 const ChatRooms = () => {
-    const { isInARoom, setIsInARoom, chatName, setChatName, } = useContext(AppContext);
+    const { isInARoom, setIsInARoom, chatName, setChatName, currentChat, setCurrentChat} = useContext(AppContext);
     const [avaliableRooms, setAvaliableRooms] = useState([]);
     useEffect(() => {
         fetch('http://localhost:5178/GetAllRooms')
@@ -45,6 +45,7 @@ const ChatRooms = () => {
                                 <p>{room.chatName}</p>
                                 <button className='ChatListJoinButton' onClick={(e) => {
                                     e.preventDefault();
+                                    setCurrentChat(room.chatID);
                                     setChatName(room.chatName);
                                     setIsInARoom(true)
                                 }}> JOIN</button>

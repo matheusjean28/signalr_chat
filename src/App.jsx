@@ -1,5 +1,5 @@
 // App.jsx
-import React, {useEffect,  useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as signalR from "@microsoft/signalr";
 import AppContext from "./Context/AppContext";
 import ChatRooms from "./Components/ChatRooms";
@@ -19,6 +19,7 @@ function App() {
   });
   const [isLoged, setIsLoged] = useState(false);
   const [isInARoom, setIsInARoom] = useState(false)
+  const [currentChat, setCurrentChat] = useState("")
   const [chatName, setChatName] = useState("")
   const [userInfo, setUserInfo] = useState({
     userId: "5d8c9046-0c60-4aba-b447-22879a0542cd",
@@ -28,8 +29,6 @@ function App() {
   })
   const [isEditing, setIsEditing] = useState(false);
   useEffect(() => {
-    const chatId = '21c1e6cf-25ff-4da0-94a9-fba47511dd2e';
-    const userId = '5d8c9046-0c60-4aba-b447-22879a0542cd';
     const newConnection = new signalR.HubConnectionBuilder()
       .withUrl("http://localhost:5178/chatHub")
       .configureLogging(signalR.LogLevel.Information)
@@ -42,7 +41,7 @@ function App() {
       .then(() => {
         console.log("Conectado ao hub!");
         if (isLoged && isInARoom) {
-          newConnection.invoke('JoinChat', userId, chatId);
+          newConnection.invoke('JoinChat', userInfo.userId, currentChat);
         }
       })
       .catch((error) => {
@@ -54,11 +53,12 @@ function App() {
         newConnection.stop();
       }
     };
-  }, [setConnection, isLoged, isInARoom]);
+  }, [setConnection, isLoged, isInARoom, userInfo.userId, currentChat]);
 
   return (
     <AppContext.Provider
       value={{
+        currentChat, setCurrentChat,
         isEditing, setIsEditing,
         userInfo, setUserInfo,
         chatName, setChatName,
