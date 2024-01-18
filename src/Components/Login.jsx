@@ -1,9 +1,10 @@
+import axios from "axios";
 import "../Styles/Login.css";
 import React, { useState, useContext } from "react";
 import AnimationsContent from "./AnimationsContent";
 import AppContext from "../Context/AppContext";
 const Login = () => {
-  const { login, setLogin, isLoged, setIsLoged, setUsername,setUserInfo} = useContext(AppContext);
+  const { login, setLogin, isLoged, setIsLoged, setUsername, setUserInfo } = useContext(AppContext);
   console.log(isLoged);
 
   const [loginCreadentials, setLoginCreadentials] = useState({
@@ -42,7 +43,34 @@ const Login = () => {
 
     // put herelocical to sync user info before logged
     // setUserInfo(userinfo.userName)
-    setIsLoged( email && password);
+    setIsLoged(email && password);
+  };
+
+  const _userLogin = {
+    UserName: 'asd',
+    Email: "asd",
+    Password: "asdf",
+    Gender: 'asdf'
+};
+
+  const handlerLoginPost = async () => {
+    try {
+
+
+      console.log(_userLogin)
+      const response = await axios.post("http://localhost:5178/Auth?UserName=asd&Email=asd&Pass=asd&Gener=asd", _userLogin
+      );
+      if (response.data) {
+        console.log(response)
+        setUsername(response.data.username);
+        setIsLoged(true);
+        setUserInfo(response.data.userInfo)
+      } else {
+        console.log("Login failed:", response.data.message);
+      }
+    } catch (error) {
+      console.error("Error during login:", error.message);
+    }
   };
   //check if username is right
   return (
@@ -86,16 +114,17 @@ const Login = () => {
           <button
             onClick={(e) => {
               e.preventDefault();
-              handlerLogin();
+              // handlerLogin();
+              handlerLoginPost()
             }}
           >
             LOGIN
           </button>
           <button onClick={(e) => {
-              e.preventDefault();
-              setUsername("<anonim user!>")
-              setIsLoged(true);
-            }} >Anonim Login</button>
+            e.preventDefault();
+            setUsername("<anonim user!>")
+            setIsLoged(true);
+          }} >Anonim Login</button>
         </form>
       </div>
     </React.Fragment>
