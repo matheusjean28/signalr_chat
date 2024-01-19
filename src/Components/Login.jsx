@@ -5,7 +5,6 @@ import AnimationsContent from "./AnimationsContent";
 import AppContext from "../Context/AppContext";
 const Login = () => {
   const { login, setLogin, isLoged, setIsLoged, setUsername, setUserInfo } = useContext(AppContext);
-  console.log(isLoged);
 
   const [loginCreadentials, setLoginCreadentials] = useState({
     name: String,
@@ -57,14 +56,13 @@ const Login = () => {
     try {
 
 
-      console.log(_userLogin)
-      const response = await axios.post("http://localhost:5178/Auth?UserName=asd&Email=asd&Pass=asd&Gener=asd", _userLogin
+      const response = await axios.post(`http://localhost:5178/Auth?UserName=${nameInput}&Email=${_userLogin.Email}&Pass=${_userLogin.Password}&Gener=${_userLogin.Gender}`
       );
       if (response.data) {
-        console.log(response)
-        setUsername(response.data.username);
+        console.log(response.data)
+        setUsername(response.data.userName);
         setIsLoged(true);
-        setUserInfo(response.data.userInfo)
+        setUserInfo(response.data)
       } else {
         console.log("Login failed:", response.data.message);
       }
@@ -90,6 +88,7 @@ const Login = () => {
             onChange={(e) => {
               e.preventDefault();
               setUsername(e.target.value.trim());
+              setNameInput(e.target.value)
             }}
           />
 

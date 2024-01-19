@@ -22,9 +22,10 @@ function App() {
   const [currentChat, setCurrentChat] = useState("")
   const [chatName, setChatName] = useState("")
   const [userInfo, setUserInfo] = useState({
-    userId: "5d8c9046-0c60-4aba-b447-22879a0542cd",
-    userName: username,
+    Id: "",
+    UserName: username,
     picProfile: "src/assets/editar.png ",
+    Gender: 'asdf',
     bio: "Lorem ipsum dolor sit, amet consectetur adipisicing elit.",
   })
   const [isEditing, setIsEditing] = useState(false);
