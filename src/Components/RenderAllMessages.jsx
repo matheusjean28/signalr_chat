@@ -30,8 +30,8 @@ const RenderAllMessages = () => {
     <ul className="RenderMessageConteiner">
       {mensagens.map(({ user, userMessage, index }) => (
         <li
-          key={index}
-          className={user === username ? "CurrentUser" : "OtherUser"}
+        key={index}
+        className={user === username ? "CurrentUser" : "OtherUser"}
         >
           <div
             className={user === username ? "CurrentUserSide" : "OtherUserSide"}

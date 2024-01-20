@@ -52,7 +52,7 @@ function App() {
         newConnection.stop();
       }
     };
-  }, [setConnection, isLoged, isInARoom, userInfo.userId, currentChat]);
+  }, [setConnection, isLoged, isInARoom]);
 
   return (
     <AppContext.Provider
