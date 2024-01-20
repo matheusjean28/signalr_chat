@@ -1,4 +1,3 @@
-// App.jsx
 import React, { useEffect, useState } from "react";
 import * as signalR from "@microsoft/signalr";
 import AppContext from "./Context/AppContext";
