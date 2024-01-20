@@ -17,32 +17,31 @@ function App() {
     password: "",
   });
   const [isLoged, setIsLoged] = useState(false);
-  const [isInARoom, setIsInARoom] = useState(false)
-  const [currentChat, setCurrentChat] = useState("")
-  const [chatName, setChatName] = useState("")
+  const [isInARoom, setIsInARoom] = useState(false);
+  const [currentChat, setCurrentChat] = useState("");
+  const [chatName, setChatName] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
   const [userInfo, setUserInfo] = useState({
     Id: "",
     UserName: username,
     picProfile: "src/assets/editar.png ",
-    Gender: 'asdf',
+    Gender: "asdf",
     bio: "Lorem ipsum dolor sit, amet consectetur adipisicing elit.",
-  })
-  const [isEditing, setIsEditing] = useState(false);
+  });
+
+  //set the first connection and change
+  //only when setConnection, isLoged, isInARoom, userInfo.userId, currentChat are changed
   useEffect(() => {
     const newConnection = new signalR.HubConnectionBuilder()
       .withUrl("http://localhost:5178/chatHub")
       .configureLogging(signalR.LogLevel.Information)
       .build();
-
     setConnection(newConnection);
 
     newConnection
       .start()
       .then(() => {
         console.log("Conectado ao hub!");
-        if (isLoged && isInARoom) {
-          newConnection.invoke('JoinChat', userInfo.userId, currentChat);
-        }
       })
       .catch((error) => {
         console.error("Erro ao conectar ao hub:", error);
@@ -58,11 +57,16 @@ function App() {
   return (
     <AppContext.Provider
       value={{
-        currentChat, setCurrentChat,
-        isEditing, setIsEditing,
-        userInfo, setUserInfo,
-        chatName, setChatName,
-        isInARoom, setIsInARoom,
+        currentChat,
+        setCurrentChat,
+        isEditing,
+        setIsEditing,
+        userInfo,
+        setUserInfo,
+        chatName,
+        setChatName,
+        isInARoom,
+        setIsInARoom,
         isLoged,
         setIsLoged,
         login,

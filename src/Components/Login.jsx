@@ -64,7 +64,7 @@ const Login = () => {
         setIsLoged(true);
         setUserInfo(response.data)
       } else {
-        console.log("Login failed:", response.data.message);
+        console.log("Login failed:", response);
       }
     } catch (error) {
       console.error("Error during login:", error.message);
