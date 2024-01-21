@@ -5,7 +5,7 @@ import ProfileSettings from "./ProfileSettings";
 import "../Styles/ChatRooms.css";
 
 const ChatRooms = () => {
-  const { connection, isInARoom, setIsInARoom, setChatName, userInfo } =
+  const { connection, isInARoom, setIsInARoom, setChatName, userInfo , setCurrentChat} =
     useContext(AppContext);
   const [availableRooms, setAvailableRooms] = useState([]);
 
@@ -45,7 +45,7 @@ const ChatRooms = () => {
   }, [connection]);
 
   const onJoinRoom = (room) => {
-    console.log("This is the chatId selected", room.chatID);
+    console.log("This is the chatID selected", room.chatID);
     if (
       connection &&
       connection.state === signalR.HubConnectionState.Connected
@@ -69,6 +69,7 @@ const ChatRooms = () => {
         <ul className="ChatListUl">
           {availableRooms.map((room) => (
             <li key={room.chatID} className="ChatListLi">
+              {console.log(room)}
               <ul className="UlUserInRoom">
                 {[...Array(Math.min(3, room.onlineUser))].map((_, index) => (
                   <li key={index} className="LiUserInRoom">
@@ -89,6 +90,8 @@ const ChatRooms = () => {
                   setChatName(room.chatName);
                   onJoinRoom(room);
                   setIsInARoom(true);
+                  
+                   setCurrentChat(room.chatID)
                 }}
               >
                 JOIN

@@ -1,31 +1,29 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import * as signalR from "@microsoft/signalr";
 import "../Styles/ChatMain.css";
 import AppContext from "../Context/AppContext";
 
-export default function ChatMain() {
-  const { connection, username, recivedMessages, setRecivedMessages } =
-    useContext(AppContext);
-
+const ChatMain = () => {
+  const { connection, currentChat, userInfo, username } = useContext(AppContext);
   const [messageInput, setMessageInput] = useState("");
 
   const enviarMensagem = (e) => {
     e.preventDefault();
 
     if (messageInput.trim() === "") {
-      console.error("Message cannot be empyt");
+      console.error("Message cannot be empty");
       return;
     }
 
-    if (
-      connection &&
-      connection.state === signalR.HubConnectionState.Connected
-    ) {
+    if (connection && connection.state === signalR.HubConnectionState.Connected) {
+      var chatId = currentChat;
+      var message = messageInput;
+      var userId = userInfo.Id;
+
       connection
-        .invoke("EnviarMensagem", username, messageInput)
-        .catch((error) => {
-          console.error("Erro :", error);
-        });
+        .invoke("SendMessageToUser", userId, username, message, chatId)
+        .catch((error) => console.error("Error:", error));
+
       setMessageInput("");
     }
   };
@@ -56,4 +54,6 @@ export default function ChatMain() {
       </div>
     </div>
   );
-}
+};
+
+export default ChatMain;

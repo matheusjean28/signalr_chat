@@ -55,7 +55,7 @@ const Login = () => {
   const handlerLoginPost = async () => {
     try {
 
-
+      console.log("called here")
       const response = await axios.post(`http://localhost:5178/Auth?UserName=${nameInput}&Email=${_userLogin.Email}&Pass=${_userLogin.Password}&Gener=${_userLogin.Gender}`
       );
       if (response.data) {
@@ -78,7 +78,7 @@ const Login = () => {
         <form className="RigthLoginConteiner" action="#">
           <h1>Dive in full bullshit!</h1>
           <h4>
-            Make sure <br /> you ready!{" "}
+            Make sure <br /> you ready!
           </h4>
 
           <input
@@ -87,7 +87,7 @@ const Login = () => {
             placeholder="User Name"
             onChange={(e) => {
               e.preventDefault();
-              setUsername(e.target.value.trim());
+              // setUsername(e.target.value.trim());
               setNameInput(e.target.value)
             }}
           />

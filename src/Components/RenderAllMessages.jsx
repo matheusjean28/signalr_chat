@@ -4,14 +4,14 @@ import AppContext from "../Context/AppContext";
 import "../Styles/RenderMessage.css";
 
 const RenderAllMessages = () => {
-  const { connection, recivedMessages, setRecivedMessages, username } =
+  const { connection, setRecivedMessages, username } =
     useContext(AppContext);
   const [mensagens, setMensagens] = useState([]);
 
   useEffect(() => {
     if (!connection) return;
 
-    connection.on("ReceberMensagem", (usuario, mensagem) => {
+    connection.on("SendMessageToUser", (usuario, mensagem) => {
       var objMessage = { user: usuario, userMessage: mensagem };
 
       console.log(Object.keys(objMessage));
@@ -19,7 +19,7 @@ const RenderAllMessages = () => {
       setRecivedMessages((prevMensagens) => [...prevMensagens, objMessage]);
     });
 
-    return () => {};
+    return () => { };
   }, [connection]);
 
   // If last message is from the same user, don't render the "You" label
@@ -30,8 +30,8 @@ const RenderAllMessages = () => {
     <ul className="RenderMessageConteiner">
       {mensagens.map(({ user, userMessage, index }) => (
         <li
-        key={index}
-        className={user === username ? "CurrentUser" : "OtherUser"}
+          key={index}
+          className={user === username ? "CurrentUser" : "OtherUser"}
         >
           <div
             className={user === username ? "CurrentUserSide" : "OtherUserSide"}
