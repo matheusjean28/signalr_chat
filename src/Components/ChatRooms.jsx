@@ -3,7 +3,8 @@ import * as signalR from "@microsoft/signalr";
 import AppContext from "../Context/AppContext";
 import ProfileSettings from "./ProfileSettings";
 import "../Styles/ChatRooms.css";
-import reconnect from  '../ConnectionMethods/OnConnetionCalled'
+import {  reconnect, onJoinRoomAsyn } 
+from '../ConnectionMethods/OnConnetionCalled';
 
 const ChatRooms = () => {
   const { connection, isInARoom, setIsInARoom, setChatName, userInfo, setCurrentChat, setConnection } =
@@ -22,14 +23,11 @@ const ChatRooms = () => {
         setAvailableRooms(data);
       } catch (error) {
         console.error("Error fetching rooms:", error.message);
-
         await reconnect(connection);
       }
     };
     fetchRooms();
   }, [isInARoom]);
-
-
 
   return (
     <div className="ChatRoomConteiner">
@@ -37,9 +35,12 @@ const ChatRooms = () => {
         <h2>JOIN ROOM!</h2>
         <p>Choose a room and join to start a conversation!</p>
         <ul className="ChatListUl">
+
+
+
+          {/* //map on each avaliable room to join */}
           {availableRooms.map((room) => (
             <li key={room.chatID} className="ChatListLi">
-              {console.log(room)}
               <ul className="UlUserInRoom">
                 {[...Array(Math.min(3, room.onlineUser))].map((_, index) => (
                   <li key={index} className="LiUserInRoom">
@@ -55,13 +56,13 @@ const ChatRooms = () => {
               <p>{room.chatName}</p>
               <button
                 className="ChatListJoinButton"
-                onClick={(e) => {
+                onClick={async (e) => {
                   e.preventDefault();
                   setChatName(room.chatName);
-                  onJoinRoom(room);
                   setIsInARoom(true);
-
                   setCurrentChat(room.chatID)
+                  //check if params is ok on the caller function
+                  onJoinRoomAsyn()
                 }}
               >
                 JOIN

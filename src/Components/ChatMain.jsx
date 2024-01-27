@@ -7,6 +7,12 @@ const ChatMain = () => {
   const { connection, currentChat, userInfo, username } = useContext(AppContext);
   const [messageInput, setMessageInput] = useState("");
   
+  connection.on("SendMessageToUser", (responseMessa) => {
+    console.log(responseMessa)
+  })
+
+
+
   const handleInputMessage = (e) => {
     setMessageInput(e.target.value);
   };

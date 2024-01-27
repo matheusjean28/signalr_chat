@@ -8,8 +8,8 @@ const OnConnectionCalled = async (connection) => {
   //check before try to send message 
   if (connection && connection.state === signalR.HubConnectionState.Connected) {
     connection
-      .invoke("SendMessageToUser", "5d8c9046-0c60-4aba-b447-22879a0542cd"
-        , "87c2354b-4e7c-4fe5-9052-45cfebfe713b", "Olá, pessoal!")
+      .invoke("SendMessageToUser", "5d8c9046-0c60-4aba-b447-22879a0542cd",
+      "87c2354b-4e7c-4fe5-9052-45cfebfe713b", "Olá, pessoal!")
       .catch((error) => console.error("Error:", error));
 
     setMessageInput("");
@@ -29,7 +29,8 @@ const reconnect = async (connection) => {
 };
 
 
-const onJoinRoom = async (userId, roomId, connection) => {
+const onJoinRoomAsyn = async (userId, roomId, connection) => {
+  console.log('was called on join async')
   try {
     if (connection && connection.state === signalR.HubConnectionState.Connected) {
 
@@ -64,4 +65,4 @@ const joinInChatAsync = async (connection) => {
   });
 }
 
-export default { OnConnectionCalled, reconnect, joinInChatAsync, onJoinRoom, };
+export  {reconnect,onJoinRoomAsyn}
