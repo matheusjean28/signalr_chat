@@ -3,12 +3,14 @@ import * as signalR from "@microsoft/signalr";
 import AppContext from "../Context/AppContext";
 import ProfileSettings from "./ProfileSettings";
 import "../Styles/ChatRooms.css";
+import reconnect from  '../ConnectionMethods/OnConnetionCalled'
 
 const ChatRooms = () => {
-  const { connection, isInARoom, setIsInARoom, setChatName, userInfo , setCurrentChat} =
+  const { connection, isInARoom, setIsInARoom, setChatName, userInfo, setCurrentChat, setConnection } =
     useContext(AppContext);
   const [availableRooms, setAvailableRooms] = useState([]);
 
+  //fetch avaliable rooms to join
   useEffect(() => {
     const fetchRooms = async () => {
       try {
@@ -20,46 +22,14 @@ const ChatRooms = () => {
         setAvailableRooms(data);
       } catch (error) {
         console.error("Error fetching rooms:", error.message);
+
+        await reconnect(connection);
       }
     };
-
     fetchRooms();
   }, [isInARoom]);
 
-  useEffect(() => {
-    const handleDisconnect = () => {
-      console.log("Connection closed");
-    };
 
-    const handleReconnecting = (error) => {
-      console.log("Reconnecting...", error);
-    };
-
-    connection.onclose(handleDisconnect);
-    connection.onreconnecting(handleReconnecting);
-
-    return () => {
-      connection.off("onclose", handleDisconnect);
-      connection.off("onreconnecting", handleReconnecting);
-    };
-  }, [connection]);
-
-  const onJoinRoom = (room) => {
-    console.log("This is the chatID selected", room.chatID);
-    if (
-      connection &&
-      connection.state === signalR.HubConnectionState.Connected
-    ) {
-      connection.invoke("JoinChat", userInfo.Id, room.chatID).catch((error) => {
-        console.error("Error:", error);
-      });
-
-      connection.on("ErrorMessage", (errorMessage) => {
-        console.error(errorMessage);
-      });
-    }
-  };
- 
 
   return (
     <div className="ChatRoomConteiner">
@@ -90,8 +60,8 @@ const ChatRooms = () => {
                   setChatName(room.chatName);
                   onJoinRoom(room);
                   setIsInARoom(true);
-                  
-                   setCurrentChat(room.chatID)
+
+                  setCurrentChat(room.chatID)
                 }}
               >
                 JOIN

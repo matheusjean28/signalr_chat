@@ -30,7 +30,8 @@ function App() {
   });
 
   //set the first connection and change
-  //only when setConnection, isLoged, isInARoom, userInfo.userId, currentChat are changed
+  //only when setConnection, 
+  //isLoged, isInARoom, userInfo.userId, currentChat are changed
   useEffect(() => {
     const newConnection = new signalR.HubConnectionBuilder()
       .withUrl("http://localhost:5178/chatHub")
@@ -40,11 +41,11 @@ function App() {
 
     newConnection
       .start()
-      .then(() => {
-        console.log("Conectado ao hub!");
+      .then((_connectionStartStatus) => {
+        console.log(_connectionStartStatus)
       })
       .catch((error) => {
-        console.error("Erro ao conectar ao hub:", error);
+        console.error( error);
       });
 
     return () => {

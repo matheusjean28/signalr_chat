@@ -6,6 +6,10 @@ import AppContext from "../Context/AppContext";
 const ChatMain = () => {
   const { connection, currentChat, userInfo, username } = useContext(AppContext);
   const [messageInput, setMessageInput] = useState("");
+  
+  const handleInputMessage = (e) => {
+    setMessageInput(e.target.value);
+  };
 
   const enviarMensagem = (e) => {
     e.preventDefault();
@@ -14,23 +18,11 @@ const ChatMain = () => {
       console.error("Message cannot be empty");
       return;
     }
-
-    if (connection && connection.state === signalR.HubConnectionState.Connected) {
-      var chatId = currentChat;
-      var message = messageInput;
-      var userId = userInfo.Id;
-
-      connection
-        .invoke("SendMessageToUser", userId, username, message, chatId)
-        .catch((error) => console.error("Error:", error));
-
-      setMessageInput("");
-    }
+    //envolve on a try catch
+    //send message method called here
+   
   };
 
-  const handleInputMessage = (e) => {
-    setMessageInput(e.target.value);
-  };
 
   return (
     <div className="ChatMainConteiner">
