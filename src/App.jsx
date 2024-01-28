@@ -32,6 +32,7 @@ function App() {
     const newConnection = new signalR.HubConnectionBuilder()
       .withUrl("http://localhost:5178/chatHub")
       .configureLogging(signalR.LogLevel.Information)
+        .withAutomaticReconnect()
       .build();
 
     newConnection
@@ -41,6 +42,7 @@ function App() {
         newConnection.onclose(async () => {
           console.log("call reconnection cause disconnected");
           await handleReconnection();
+          
         });
       })
       .catch((error) => {

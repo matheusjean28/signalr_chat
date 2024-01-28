@@ -4,7 +4,7 @@ import React, { useState, useContext } from "react";
 import AnimationsContent from "./AnimationsContent";
 import AppContext from "../Context/AppContext";
 const Login = () => {
-  const { login, setLogin, isLoged, setIsLoged, setUsername, setUserInfo } = useContext(AppContext);
+  const { login, setLogin, isLoged, setIsLoged, setUsername, setUserInfo, userInfo } = useContext(AppContext);
 
   const [loginCreadentials, setLoginCreadentials] = useState({
     name: String,
@@ -50,7 +50,7 @@ const Login = () => {
     Email: "asd",
     Password: "asdf",
     Gender: 'asdf'
-};
+  };
 
   const handlerLoginPost = async () => {
     try {
@@ -60,7 +60,20 @@ const Login = () => {
       if (response.data) {
         setUsername(response.data.userName);
         setIsLoged(true);
+
+
         setUserInfo(response.data)
+        const _newUserData = {
+          Id: response.data.id,
+          UserName: response.data.UserName,
+          picProfile: "",
+          Gender: "",
+          bio: ""
+        }
+
+        setUserInfo(_newUserData)
+
+
       } else {
         console.log("Login failed:", response);
       }

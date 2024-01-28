@@ -90,7 +90,8 @@ const ChatRooms = () => {
 
                   //replace with rigth values and check if ok before send req
                   console.log("user id that calls", userInfo.Id)
-                  onJoinRoomAsyn(userInfo.Id, room.chatID, connection,)
+                  // onJoinRoomAsyn(userInfo.Id, room.chatID, connection)
+                  // connection.invoke("AddToGroup", "teste")
                 }}
               >
                 JOIN

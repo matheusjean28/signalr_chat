@@ -7,12 +7,17 @@ const RenderAllMessages = () => {
   const { connection, setRecivedMessages, username } = useContext(AppContext);
   const [mensagens, setMensagens] = useState([]);
 
+
+  connection.on("AddToGroup", (response) => {
+    console.log(response)
+  })
+
   useEffect(() => {
     if (!connection) return;
 
     connection.on("SendMessageToUser", (data) => {
       // console.log(data)
-      var {usuario, mensagem} = data;
+      var { usuario, mensagem } = data;
       var objMessage = { user: usuario, userMessage: mensagem };
 
       // console.log(Object.keys(objMessage));
@@ -34,7 +39,7 @@ const RenderAllMessages = () => {
     mensagens.length === 0 || mensagens[mensagens.length - 1].user !== username;
 
   return (
-    
+
     <ul className="RenderMessageConteiner">
       {mensagens.map(({ user, userMessage, index }) => (
         <li
