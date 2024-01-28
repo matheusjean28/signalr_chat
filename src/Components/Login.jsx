@@ -55,11 +55,9 @@ const Login = () => {
   const handlerLoginPost = async () => {
     try {
 
-      console.log("called here")
       const response = await axios.post(`http://localhost:5178/Auth?UserName=${nameInput}&Email=${_userLogin.Email}&Pass=${_userLogin.Password}&Gener=${_userLogin.Gender}`
       );
       if (response.data) {
-        console.log(response.data)
         setUsername(response.data.userName);
         setIsLoged(true);
         setUserInfo(response.data)

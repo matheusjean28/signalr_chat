@@ -28,32 +28,38 @@ function App() {
     Gender: "asdf",
     bio: "Lorem ipsum dolor sit, amet consectetur adipisicing elit.",
   });
-
-  //set the first connection and change
-  //only when setConnection, 
-  //isLoged, isInARoom, userInfo.userId, currentChat are changed
   useEffect(() => {
     const newConnection = new signalR.HubConnectionBuilder()
       .withUrl("http://localhost:5178/chatHub")
       .configureLogging(signalR.LogLevel.Information)
       .build();
-    setConnection(newConnection);
 
     newConnection
       .start()
-      .then((_connectionStartStatus) => {
-        console.log(_connectionStartStatus)
+      .then(() => {
+        setConnection(newConnection);
+        newConnection.onclose(async () => {
+          console.log("call reconnection cause disconnected");
+          await handleReconnection();
+        });
       })
       .catch((error) => {
-        console.error( error);
+        console.error(error);
+        setTimeout(() => handleReconnection(), 5000);
       });
-
-    return () => {
-      if (newConnection) {
-        newConnection.stop();
-      }
-    };
   }, [setConnection, isLoged, isInARoom]);
+
+  //called when connection goes wrong
+  const handleReconnection = async () => {
+    console.log("Trying to reconnect...");
+    try {
+      await connection.start();
+      console.log("Reconnected successfully!");
+    } catch (error) {
+      console.error("Error reconnecting:", error);
+      setTimeout(() => handleReconnection(), 1000);
+    }
+  };
 
   return (
     <AppContext.Provider
@@ -80,6 +86,11 @@ function App() {
         setRecivedMessages,
       }}
     >
+      {connection === null ? (
+        <h3 className="ConnectionStatus">disconnected</h3>
+      ) : (
+        <h3 className="ConnectionStatus conected">{`${connection.state}`}</h3>
+      )}
       {isLoged ? (
         isInARoom ? (
           <div className="MainGrid">

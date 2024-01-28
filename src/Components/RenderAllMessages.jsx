@@ -11,17 +11,17 @@ const RenderAllMessages = () => {
     if (!connection) return;
 
     connection.on("SendMessageToUser", (data) => {
-      console.log(data)
+      // console.log(data)
       var {usuario, mensagem} = data;
       var objMessage = { user: usuario, userMessage: mensagem };
 
-      console.log(Object.keys(objMessage));
+      // console.log(Object.keys(objMessage));
       setMensagens((prevMensagens) => [...prevMensagens, objMessage]);
       setRecivedMessages((prevMensagens) => [...prevMensagens, objMessage]);
     });
 
     connection.on("errormessage", (error) => {
-      console.log(error)
+      // console.log(error)
     })
 
     return () => { };
@@ -34,6 +34,7 @@ const RenderAllMessages = () => {
     mensagens.length === 0 || mensagens[mensagens.length - 1].user !== username;
 
   return (
+    
     <ul className="RenderMessageConteiner">
       {mensagens.map(({ user, userMessage, index }) => (
         <li

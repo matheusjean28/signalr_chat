@@ -3,13 +3,41 @@ import * as signalR from "@microsoft/signalr";
 import AppContext from "../Context/AppContext";
 import ProfileSettings from "./ProfileSettings";
 import "../Styles/ChatRooms.css";
-import {  reconnect, onJoinRoomAsyn } 
-from '../ConnectionMethods/OnConnetionCalled';
+import { onJoinRoomAsyn }
+  from '../ConnectionMethods/OnConnetionCalled';
 
 const ChatRooms = () => {
   const { connection, isInARoom, setIsInARoom, setChatName, userInfo, setCurrentChat, setConnection } =
     useContext(AppContext);
   const [availableRooms, setAvailableRooms] = useState([]);
+
+  //event when user join at room
+  connection.on("JoinChat", (message) => {
+    console.log("User connected successfully:", message);
+  });
+
+  connection.on("ReciveMessage", arg => {
+    console.log(arg)
+  })
+  connection.on("SendMessageToUser", arg => {
+    console.log(arg)
+  })
+
+  connection.on("UpdateUsersInChatMethod", usersInChat => {
+    console.log(usersInChat)
+  })
+
+  //try to fetch avaliable romms again until get it
+  const reconnectAvaliableRooms = async (connection) => {
+    console.log("Trying to reconnect...");
+    try {
+      await connection.start();
+      console.log("Reconnected successfully!");
+    } catch (error) {
+      console.error("Error reconnecting:", error);
+      setTimeout(() => reconnectAvaliableRooms(connection), 1000);
+    }
+  };
 
   //fetch avaliable rooms to join
   useEffect(() => {
@@ -23,7 +51,7 @@ const ChatRooms = () => {
         setAvailableRooms(data);
       } catch (error) {
         console.error("Error fetching rooms:", error.message);
-        await reconnect(connection);
+        reconnectAvaliableRooms(connection)
       }
     };
     fetchRooms();
@@ -35,8 +63,6 @@ const ChatRooms = () => {
         <h2>JOIN ROOM!</h2>
         <p>Choose a room and join to start a conversation!</p>
         <ul className="ChatListUl">
-
-
 
           {/* //map on each avaliable room to join */}
           {availableRooms.map((room) => (
@@ -61,8 +87,10 @@ const ChatRooms = () => {
                   setChatName(room.chatName);
                   setIsInARoom(true);
                   setCurrentChat(room.chatID)
-                  //check if params is ok on the caller function
-                  onJoinRoomAsyn()
+
+                  //replace with rigth values and check if ok before send req
+                  console.log("user id that calls", userInfo.Id)
+                  onJoinRoomAsyn(userInfo.Id, room.chatID, connection,)
                 }}
               >
                 JOIN

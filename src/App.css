@@ -40,3 +40,20 @@
 
   border-radius: 10px;
 }
+
+.ConnectionStatus {
+  background-color: rgba(255, 0, 0, 0.291);
+  height: 50px;
+  position: absolute;
+  bottom: 10px;
+  margin-left: 50px;
+  place-content: center;
+  place-items: center;
+  display: flex;
+  border-radius: 5px;
+  z-index: -1000;
+}
+
+.conected {
+  background-color: rgba(6, 173, 6, 0.512);
+}
