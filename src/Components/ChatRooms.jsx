@@ -11,21 +11,14 @@ const ChatRooms = () => {
     useContext(AppContext);
   const [availableRooms, setAvailableRooms] = useState([]);
 
-  //event when user join at room
-  connection.on("JoinChat", (message) => {
-    console.log("User connected successfully:", message);
-  });
-
-  connection.on("ReciveMessage", arg => {
-    console.log(arg)
-  })
-  connection.on("SendMessageToUser", arg => {
-    console.log(arg)
+  connection.on("ReciveMessage", (reviced) => {
+    console.log(reviced)
   })
 
-  connection.on("UpdateUsersInChatMethod", usersInChat => {
-    console.log(usersInChat)
+  connection.on("Error", (reviced) => {
+    console.log(reviced)
   })
+
 
   //try to fetch avaliable romms again until get it
   const reconnectAvaliableRooms = async (connection) => {
@@ -88,10 +81,13 @@ const ChatRooms = () => {
                   setIsInARoom(true);
                   setCurrentChat(room.chatID)
 
-                  //replace with rigth values and check if ok before send req
-                  console.log("user id that calls", userInfo.Id)
-                  // onJoinRoomAsyn(userInfo.Id, room.chatID, connection)
-                  // connection.invoke("AddToGroup", "teste")
+                  //Try to join at the room, if not allow, server return an error
+                  //parms:
+                  // UserId, Gender, ChatId
+                  onJoinRoomAsyn("SendMessageToGroup", "5d8c9046-0c60-4aba-b447-22879a0542cd",
+                    "21c1e6cf-25ff-4da0-94a9-fba47511dd2e",
+                    "message de teste", "token", connection)
+
                 }}
               >
                 JOIN

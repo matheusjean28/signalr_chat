@@ -17,8 +17,8 @@ const OnConnectionCalled = async (connection) => {
   }
 };
 
-
-const onJoinRoomAsyn = async (userId, roomId, connection) => {
+7
+const onJoinRoomAsyn = async (userId, roomId, userMessage, _token, connection) => {
   const reconnect = async (connection) => {
     console.log("reconnection called");
     try {
@@ -33,11 +33,9 @@ const onJoinRoomAsyn = async (userId, roomId, connection) => {
 
   try {
     if (connection && connection.state === signalR.HubConnectionState.Connected) {
-
       console.log("Attempting to join the chat...");
 
-      await connection.invoke("JoinChat", "5d8c9046-0c60-4aba-b447-22879a0542cd", roomId);
-      console.log(userId, roomId)
+      await connection.invoke("SendMessageToGroup",userId, roomId, userMessage, _token);
     } else {
       console.error("Connection is not established or is not in a connected state.");
       await reconnect();
@@ -49,7 +47,7 @@ const onJoinRoomAsyn = async (userId, roomId, connection) => {
     await reconnect(connection);
   }
 
-  connection.on("errormessage", (errorMessage) => {
+  connection.on("Error", (errorMessage) => {
     console.error(errorMessage);
   });
 };
