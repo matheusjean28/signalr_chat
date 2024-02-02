@@ -15,8 +15,8 @@ const RenderAllMessages = () => {
   useEffect(() => {
     if (!connection) return;
 
-    connection.on("SendMessageToUser", (data) => {
-      // console.log(data)
+    connection.on("ReceiveMessage", (data) => {
+      console.log(data)
       var { usuario, mensagem } = data;
       var objMessage = { user: usuario, userMessage: mensagem };
 

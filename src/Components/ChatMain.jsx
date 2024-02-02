@@ -12,6 +12,15 @@ const ChatMain = () => {
     setMessageInput(e.target.value);
   };
 
+  connection.on("Error", (Error) => {
+    console.log(Error)
+  })
+
+  connection.on("sendmessagetogroup", (conne) => {
+    console.log(conne)
+  })
+
+ 
   const enviarMensagem = async (e) => {
     e.preventDefault();
 
@@ -20,20 +29,9 @@ const ChatMain = () => {
       return;
     }
     else {
-
       try {
-        const message = {usuario: "matheus", mensagem: "messa"}
-        if (connection && connection.state === signalR.HubConnectionState.Connected) {
-          await connection.invoke("SendMessageToUser",
-            "5d8c9046-0c60-4aba-b447-22879a0542cd",
-             userInfo.UserName,
-             message,
-             currentChat
-          );
-
-        } else {
-          console.error("Connection is not established or is not in a connected state.");
-        }
+        var messageContent = { user: username, mensagem: messageInput }; 
+        await connection.invoke("SendMessageToGroup", userInfo.Id, currentChat, messageContent, "token");
       } catch (error) {
         console.log(error)
       }
@@ -56,9 +54,12 @@ const ChatMain = () => {
 
         <button
           className="sendMessageButton"
-          onClick={(e) => {
+          onClick={async (e) => {
             enviarMensagem(e);
+            e.preventDefault();
+          console.log("Connection id Value", connection.connectionId)
 
+            // await connection.invoke("SendMessageToGroup", userInfo.Id, currentChat, messageInput, "token");
           }}
         >
           Send

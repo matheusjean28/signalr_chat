@@ -1,6 +1,6 @@
 left all funcions about connection inside an object that can handle connection
 
-1- list room to join
-2- call join room method
-3- check if is in a romm 
-4- try to send a message 
+1- list room to join -- ok
+2- call join room method -- ok
+3- check if is in a romm  -- ok
+4- try to send a message -- ok is sending 
