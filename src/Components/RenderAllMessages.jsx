@@ -16,9 +16,10 @@ const RenderAllMessages = () => {
     if (!connection) return;
 
     connection.on("ReceiveMessage", (data) => {
-      console.log(data)
-      var { usuario, mensagem } = data;
-      var objMessage = { user: usuario, userMessage: mensagem };
+      console.log("Data value: ",Object.values( data[0]))
+      var { user, message } = data[0];
+
+      var objMessage = { user: user, userMessage: message };
 
       // console.log(Object.keys(objMessage));
       setMensagens((prevMensagens) => [...prevMensagens, objMessage]);
@@ -43,8 +44,8 @@ const RenderAllMessages = () => {
     <ul className="RenderMessageConteiner">
       {mensagens.map(({ user, userMessage, index }) => (
         <li
-          key={index}
-          className={user === username ? "CurrentUser" : "OtherUser"}
+        key={index}
+        className={user === username ? "CurrentUser" : "OtherUser"}
         >
           <div
             className={user === username ? "CurrentUserSide" : "OtherUserSide"}

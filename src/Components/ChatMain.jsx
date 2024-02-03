@@ -30,8 +30,7 @@ const ChatMain = () => {
     }
     else {
       try {
-        var messageContent = { user: username, mensagem: messageInput }; 
-        await connection.invoke("SendMessageToGroup", userInfo.Id, currentChat, messageContent, "token");
+        await connection.invoke("SendMessageToGroup", userInfo.Id, currentChat, username,  messageInput, "token");
       } catch (error) {
         console.log(error)
       }
