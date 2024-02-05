@@ -81,7 +81,7 @@ const ChatRooms = () => {
 
                   //Try to join at the room, if not allow, server return an error
                   //parms:
-                  console.log(userInfo.Id, currentChat, "Connection id Value", connection.connectionId)
+                  // console.log(userInfo.Id, currentChat, "Connection id Value", connection.connectionId)
                  await connection.invoke("JoinChat", userInfo.Id,
                   room.chatID);
                 }}

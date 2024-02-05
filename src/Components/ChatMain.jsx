@@ -56,9 +56,6 @@ const ChatMain = () => {
           onClick={async (e) => {
             enviarMensagem(e);
             e.preventDefault();
-          console.log("Connection id Value", connection.connectionId)
-
-            // await connection.invoke("SendMessageToGroup", userInfo.Id, currentChat, messageInput, "token");
           }}
         >
           Send

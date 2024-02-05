@@ -12,18 +12,19 @@ const RenderAllMessages = () => {
     console.log(response)
   })
 
+  
   useEffect(() => {
     if (!connection) return;
 
     connection.on("ReceiveMessage", (data) => {
-      console.log("Data value: ",Object.values( data[0]))
       var { user, message } = data[0];
-
       var objMessage = { user: user, userMessage: message };
-
-      // console.log(Object.keys(objMessage));
+      console.log("message . user", mensagens)
+      var _messagesTreat = objMessage;
+      console.log(_messagesTreat)
+      
       setMensagens((prevMensagens) => [...prevMensagens, objMessage]);
-      setRecivedMessages((prevMensagens) => [...prevMensagens, objMessage]);
+      setRecivedMessages((prevMensagens) => [...prevMensagens, mensagens]);
     });
 
     connection.on("errormessage", (error) => {
@@ -31,8 +32,7 @@ const RenderAllMessages = () => {
     })
 
     return () => { };
-  }, [connection]);
-
+  }, []);
 
 
   // If last message is from the same user, don't render the "You" label
@@ -44,8 +44,8 @@ const RenderAllMessages = () => {
     <ul className="RenderMessageConteiner">
       {mensagens.map(({ user, userMessage, index }) => (
         <li
-        key={index}
-        className={user === username ? "CurrentUser" : "OtherUser"}
+          key={`${user}-${index}`}
+          className={user === username ? "CurrentUser" : "OtherUser"}
         >
           <div
             className={user === username ? "CurrentUserSide" : "OtherUserSide"}
