@@ -52,7 +52,7 @@ function App() {
   }, [setConnection, isLoged, isInARoom]);
 
   //called when connection goes wrong
-  const handleReconnection = async () => {
+  const handleReconnection = async (connection) => {
     console.log("Trying to reconnect...");
     try {
       await connection.start();
