@@ -5,9 +5,9 @@ import AppContext from '../Context/AppContext.jsx';
 import EditProfileSettings from './EditProfileSettings.jsx';
 
 const ProfileSettings = () => {
-    const { username, setUsername, setIsInARoom, userInfo, setUserInfo,isEditing, setIsEditing } = useContext(AppContext);
+    const { username, setUsername, setIsInARoom, userInfo, setUserInfo, isEditing, setIsEditing, isCreatingARoom, setCreatingARoom } = useContext(AppContext);
     return (<>
-       {!isEditing ? <div className="ProfileConteiner">
+        {!isEditing ? <div className="ProfileConteiner">
             <h3>PROFILE SETTINGS</h3>
             <img className='ProfilePicture' src="src/assets/astronaut.svg" alt="astronaut" />
             <h5>{username}</h5>
@@ -24,9 +24,20 @@ const ProfileSettings = () => {
                 onClick={(e) => {
                     e.preventDefault()
                     setIsInARoom(false)
+                    if (isCreatingARoom === true) {
+                        setCreatingARoom(false)
+                     }
                 }} >{"<-"}</button>
 
-            <button className='EditProfile'  
+
+            <button onClick={(e) => {
+                e.preventDefault();
+                setCreatingARoom(!isCreatingARoom);
+            }}>
+                Create
+            </button>
+
+            <button className='EditProfile'
                 onClick={(e) => {
                     e.preventDefault()
                     setIsEditing(true);
@@ -37,7 +48,7 @@ const ProfileSettings = () => {
                 <img className='EditProfileImg' src="src/assets/editar.png" alt="" />
             </button>
 
-        </div> : <EditProfileSettings/>}
+        </div> : <EditProfileSettings />}
     </>)
 }
 export default ProfileSettings;

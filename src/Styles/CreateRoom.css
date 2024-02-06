@@ -1,0 +1,108 @@
+.CreateRoomConteiner {
+    display: grid;
+    grid-template-columns: 5fr 2fr;
+
+    height: 100%;
+
+    position: relative;
+}
+
+.errorNotification{
+    position: absolute;
+    width: 300px;
+    background-color:  rgba(255, 10, 10, 0.481);
+    bottom: 10px;
+    border-radius: 5px;
+}
+
+.ConteinerLeft {
+    display: flex;
+    flex-direction:column;
+    overflow: hidden;
+    height: 100%;
+    place-content: center;
+    place-items: center;
+}
+
+.CreateChatForm{
+    display:  flex;
+    height: 400px;
+    width: 350px;
+    flex-direction: column;
+    gap: 10px;
+    
+    padding: 10px;
+    
+    border-radius: 8px;
+    background-color: rgb(96, 4, 189);
+
+
+    place-content: center;
+    place-items: center;
+}
+
+.formInputs {
+    padding: 5px 10px;
+    border-radius: 5px;
+    
+    background-color: aliceblue;
+    border: none;
+    color: black;
+    font-weight: bold;
+}
+
+.chatDesc{
+    font-size: small;
+ 
+}
+.formBtnCreate {
+    padding: 8px 10px;
+    font-weight: bolder;
+    
+    background-color: black;
+    border: none;
+    border-radius: 8px  ;
+}
+.Desc{
+    height: 50px;
+    width: auto; 
+    word-wrap: break-word;
+}
+
+.formBtnCreate:hover {
+    transform:translateY(5px)  ;
+    transition: ease-in-out .2s;
+    background-color: rgba(0, 0, 0, 0.671);
+
+}
+
+
+.wrongField  {
+    background-color: rgba(255, 10, 10, 0.481);
+    border: 1px solid red;
+}
+
+/* this part is show when ´createdSucess´ is 
+true on createRoom.jsx component */
+.createdChat{
+    height: 90%;
+    width: 80%;
+
+    border-radius: 10px;
+    background-color: rgba(6, 199, 6, 0.535);
+    
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+}
+
+.CreateInfoConteiner{
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
+}
+
+.warningFeature{
+    margin-top: 150px;
+    font-style: italic;
+}

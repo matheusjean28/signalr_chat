@@ -6,6 +6,7 @@ import RenderAllMessages from "./Components/RenderAllMessages";
 import Login from "./Components/Login";
 import ProfileSettings from "./Components/ProfileSettings";
 import "./App.css";
+import CreateRoom from "./Components/CreateRoom";
 
 function App() {
   const [username, setUsername] = useState("");
@@ -21,6 +22,7 @@ function App() {
   const [currentChat, setCurrentChat] = useState("");
   const [chatName, setChatName] = useState("");
   const [isEditing, setIsEditing] = useState(false);
+  const [isCreatingARoom, setCreatingARoom] = useState(false);
   const [userInfo, setUserInfo] = useState({
     Id: "",
     UserName: username,
@@ -32,7 +34,7 @@ function App() {
     const newConnection = new signalR.HubConnectionBuilder()
       .withUrl("http://localhost:5178/chatHub")
       .configureLogging(signalR.LogLevel.Information)
-        .withAutomaticReconnect()
+      .withAutomaticReconnect()
       .build();
 
     newConnection
@@ -41,8 +43,8 @@ function App() {
         setConnection(newConnection);
         newConnection.onclose(async () => {
           console.log("call reconnection cause disconnected");
-          await handleReconnection();
-          
+          await handleReconnection(connection);
+
         });
       })
       .catch((error) => {
@@ -66,6 +68,8 @@ function App() {
   return (
     <AppContext.Provider
       value={{
+        isCreatingARoom,
+        setCreatingARoom,
         currentChat,
         setCurrentChat,
         isEditing,
@@ -88,24 +92,41 @@ function App() {
         setRecivedMessages,
       }}
     >
+      {/*
+      create an icon to show for user what is your current state connection
       {connection === null ? (
         <h3 className="ConnectionStatus">disconnected</h3>
       ) : (
         <h3 className="ConnectionStatus conected">{`${connection.state}`}</h3>
-      )}
+      )} */}
+
+
+
+
       {isLoged ? (
-        isInARoom ? (
-          <div className="MainGrid">
-            <h2 className="MainGridChatName">{chatName}</h2>
-            <RenderAllMessages />
-            <ProfileSettings />
-          </div>
-        ) : (
-          <ChatRooms />
-        )
+        //yes
+        isCreatingARoom ? (
+          //yes
+          <CreateRoom />
+        ) :
+
+          (isInARoom ? (
+            //yes
+            (
+              <div className="MainGrid">
+                <h2 className="MainGridChatName">{chatName}</h2>
+                <RenderAllMessages />
+                <ProfileSettings />
+              </div>
+            )
+          ) : (
+            <ChatRooms />
+          )
+          )
       ) : (
         <Login />
       )}
+
     </AppContext.Provider>
   );
 }
