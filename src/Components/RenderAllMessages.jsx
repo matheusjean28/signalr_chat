@@ -4,36 +4,29 @@ import AppContext from "../Context/AppContext";
 import "../Styles/RenderMessage.css";
 
 const RenderAllMessages = () => {
-  const { connection, setRecivedMessages, username } = useContext(AppContext);
+  const { connection, username } = useContext(AppContext);
   const [mensagens, setMensagens] = useState([]);
 
 
   connection.on("AddToGroup", (response) => {
-    console.log(response)
+    // console.log(response)
   })
 
-  
-  useEffect(() => {
-    if (!connection) return;
 
     connection.on("ReceiveMessage", (data) => {
-      var { user, message } = data[0];
-      var objMessage = { user: user, userMessage: message };
-      console.log("message . user", mensagens)
-      var _messagesTreat = objMessage;
-      console.log(_messagesTreat)
-      
-      setMensagens((prevMensagens) => [...prevMensagens, objMessage]);
-      setRecivedMessages((prevMensagens) => [...prevMensagens, mensagens]);
+
+      const newMessage = data[0];
+      console.log("newmessage", newMessage)
+      const _newMessage = {user: newMessage.user, userMessage: newMessage.message}
+      if (!mensagens.find(message => message.user === newMessage.user && message.userMessage === newMessage.message)) {
+        setMensagens(prevMensagens => [...prevMensagens, _newMessage]);
+      }
     });
 
     connection.on("errormessage", (error) => {
-      // console.log(error)
     })
 
-    return () => { };
-  }, []);
-
+  // console.log(mensagens)
 
   // If last message is from the same user, don't render the "You" label
   const shouldRenderYouLabel =
@@ -42,9 +35,9 @@ const RenderAllMessages = () => {
   return (
 
     <ul className="RenderMessageConteiner">
-      {mensagens.map(({ user, userMessage, index }) => (
+      {mensagens.map(({ user, userMessage  },index) => (
         <li
-          key={`${user}-${index}`}
+          key={`${user}-${index}-${Date.UTC}`}
           className={user === username ? "CurrentUser" : "OtherUser"}
         >
           <div

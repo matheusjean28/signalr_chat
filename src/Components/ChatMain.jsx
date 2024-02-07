@@ -30,6 +30,7 @@ const ChatMain = () => {
     }
     else {
       try {
+        //replace token by the user token when auth service is done
         await connection.invoke("SendMessageToGroup", userInfo.Id, currentChat, username,  messageInput, "token");
       } catch (error) {
         console.log(error)
