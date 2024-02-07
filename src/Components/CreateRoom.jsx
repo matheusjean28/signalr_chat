@@ -79,17 +79,17 @@ const CreateRoom = () => {
             console.log("creating a room")
             try {
                 const resp = await axios.post('http://localhost:5178/CreateRoom?chatName=testedesala&onlineUser=3&userId=5d8c9046-0c60-4aba-b447-22879a0542cd');
-                if (!resp.ok) {
-                    console.log(resp)
+                if (!resp.status ==  200) {
                     showError("resp");
                     throw new Error("Fail at create room!")
                 } else {
-                    console.log(resp)
-                    console.log(resp.data)
+                    console.log("status ",resp.status)
                     setResponseCreatedRoom(resp.data)
+                    setCreatedSucess(true)
+                    
                 }
             } catch (error) {
-
+                console.log(error)
             }
 
         } else {
@@ -109,21 +109,21 @@ const CreateRoom = () => {
             to ask if chat is public or closed ´private
         */}
             <div className="ConteinerLeft">
-                {true ?
+                {createdSucess ?(
                     <div className="createdChat">
                         <h2>Your Room Was Created!</h2>
                         <p>Now you can gather all your friends in one place!</p>
                         <div className="CreateInfoConteiner">
-                            <h5>ChatName:</h5>
+                            <h5 className='DescCreatedChat' >ChatName:</h5>
                             <h5>{responseCreatedRoom.chatName.toUpperCase()}</h5>
 
-                            <h5>Max Users:</h5>
+                            <h5 className='DescCreatedChat' >Max Users:</h5>
                             <h5>{responseCreatedRoom.onlineUser}</h5>
 
                         </div>
                         <h4 className='warningFeature'>At this moment your chat is Public <br />we are working to create a new feature "Private Rooms"!</h4>
 
-                    </div>
+                    </div>)
                     : <form className="CreateChatForm">
                         <h2>CREATE CHAT</h2>
                         <input onChange={(e) => {
