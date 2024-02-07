@@ -1,8 +1,16 @@
 import '../Styles/CreateRoom.css'
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import ProfileSettings from "./ProfileSettings";
 import axios from 'axios';
+import AppContext from '../Context/AppContext';
+
 const CreateRoom = () => {
+    const {userInfo} =useContext(AppContext);
+    
+    //replace when run build
+    // const apiUrl = process.env.REACT_APP_API_URL;
+
+    
     const [chatName, setChatName] = useState('')
     const [maxUser, setMaxUsers] = useState(10);//defoult is '10
     const [chatDesc, setChatDesc] = useState('');
@@ -78,18 +86,24 @@ const CreateRoom = () => {
             isValidDesc) {
             console.log("creating a room")
             try {
-                const resp = await axios.post('http://localhost:5178/CreateRoom?chatName=testedesala&onlineUser=3&userId=5d8c9046-0c60-4aba-b447-22879a0542cd');
-                if (!resp.status ==  200) {
+                const resp = await axios.post(`http://localhost:5178/CreateRoom?`, {
+                    chatName: chatName,
+                    onlineUser: maxUser,
+                    userId: userInfo.Id,
+                });
+                if (resp.status !== 200) {
                     showError("resp");
                     throw new Error("Fail at create room!")
                 } else {
+                    console.log(resp.response)
                     console.log("status ",resp.status)
                     setResponseCreatedRoom(resp.data)
                     setCreatedSucess(true)
                     
                 }
             } catch (error) {
-                console.log(error)
+                console.log(error.response)
+
             }
 
         } else {
