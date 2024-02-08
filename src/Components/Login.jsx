@@ -3,6 +3,7 @@ import "../Styles/Login.css";
 import React, { useState, useContext } from "react";
 import AnimationsContent from "./AnimationsContent";
 import AppContext from "../Context/AppContext";
+import { DisabledTransportError } from "@microsoft/signalr/dist/esm/Errors";
 const Login = () => {
   const { login, setLogin, isLoged, setIsLoged, setUsername, setUserInfo, userInfo } = useContext(AppContext);
 
@@ -21,6 +22,10 @@ const Login = () => {
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
 
+  // error message to display
+  const [errorMessage, setErrorMessage] = useState("");
+
+
   const isStrongPassword = (password) => {
     const hasLength = password.length >= 8;
     const hasUppercase = /[A-Z]/.test(password);
@@ -29,35 +34,31 @@ const Login = () => {
     return hasLength && hasUppercase && hasLowercase && hasNumber;
   };
 
-  const handlerLogin = () => {
-    // if (nameInput === "teste") {
-    //   setName(true);
-    if (emailInput === "123456") {
-      setPassword(true);
-    }
-    if (passwordInput === "123456") {
-      setEmail(true);
-    }
-    console.log("here isLoged", isLoged.value);
 
-    // put herelocical to sync user info before logged
-    // setUserInfo(userinfo.userName)
-    setIsLoged(email && password);
-  };
+  const showError = (errorMessage) => {
+    console.log('funcai chanada')
+    setErrorMessage(errorMessage);
+    setTimeout(() => {
+      setErrorMessage('');
+    }, 5000);
+  }
 
-  const _userLogin = {
-    UserName: 'asd',
-    Email: "asd",
-    Password: "asdf",
-    Gender: 'asdf'
-  };
 
   const handlerLoginPost = async () => {
     try {
-
-      const response = await axios.post(`http://localhost:5178/Auth?UserName=${nameInput}&Email=${_userLogin.Email}&Pass=${_userLogin.Password}&Gener=${_userLogin.Gender}`
+      const response = await axios.post(`http://localhost:5178/Auth`,
+        {
+          UserName: nameInput,
+          Email: emailInput,
+          Pass: passwordInput,
+        }
       );
-      if (response.data) {
+
+
+      if (response.status !== 200) {
+        throw new Error;
+
+      } else {
         setUsername(response.data.userName);
         setIsLoged(true);
 
@@ -70,15 +71,10 @@ const Login = () => {
           Gender: "",
           bio: ""
         }
-
         setUserInfo(_newUserData)
-
-
-      } else {
-        console.log("Login failed:", response);
       }
     } catch (error) {
-      console.error("Error during login:", error.message);
+      showError('UserName or Password Invalid! Check and try again...')
     }
   };
   //check if username is right
@@ -86,6 +82,11 @@ const Login = () => {
     <React.Fragment>
       <div className="LoginConteiner">
         <AnimationsContent />
+        {errorMessage && (
+          <div className="errorLogin">
+            <p>{errorMessage}</p>
+          </div>)
+        }
         <form className="RigthLoginConteiner" action="#">
           <h1>Dive in full bullshit!</h1>
           <h4>
@@ -130,6 +131,8 @@ const Login = () => {
           >
             LOGIN
           </button>
+
+          {/* anonim login buton */}
           <button onClick={(e) => {
             e.preventDefault();
             setUsername("<anonim user!>")
