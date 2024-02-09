@@ -36,7 +36,6 @@ const Login = () => {
 
 
   const showError = (errorMessage) => {
-    console.log('funcai chanada')
     setErrorMessage(errorMessage);
     setTimeout(() => {
       setErrorMessage('');
@@ -46,37 +45,43 @@ const Login = () => {
 
   const handlerLoginPost = async () => {
     try {
-      const response = await axios.post(`http://localhost:5178/Auth`,
-        {
-          UserName: nameInput,
-          Email: emailInput,
-          Pass: passwordInput,
-        }
-      );
+      console.log(passwordInput, nameInput)
+      const response = await axios.post(`http://localhost:5178/Auth`, {
+        UserName: nameInput,
+        Email: emailInput,
+        password: passwordInput,
+      });
 
-
-      if (response.status !== 200) {
-        throw new Error;
-
-      } else {
+      if (response.status === 200) {
         setUsername(response.data.userName);
         setIsLoged(true);
 
-
-        setUserInfo(response.data)
-        const _newUserData = {
+        const newUserData = {
           Id: response.data.id,
-          UserName: response.data.UserName,
+          UserName: response.data.userName,
           picProfile: "",
           Gender: "",
-          bio: ""
-        }
-        setUserInfo(_newUserData)
+          bio: "",
+        };
+        console.log(response)
+        setUserInfo(newUserData);
+      } else {
+        console.error(`Unexpected response status: ${response.AxiosError}`);
+        throw new Error (response.AxiosError)
+        
+
       }
     } catch (error) {
-      showError('UserName or Password Invalid! Check and try again...')
+      console.log("An error occurred during login:", error.response.data);
+      var _stringMessage;
+      if (error.response && error.response.data) {
+        _stringMessage = `An error occurred: ${error.response.data}`;
+      } else {
+        _stringMessage = "An unknown error occurred during login.";
+      }      showError(_stringMessage);
     }
   };
+
   //check if username is right
   return (
     <React.Fragment>
