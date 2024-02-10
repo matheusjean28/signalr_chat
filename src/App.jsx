@@ -3,7 +3,7 @@ import * as signalR from "@microsoft/signalr";
 import AppContext from "./Context/AppContext";
 import ChatRooms from "./Components/ChatRooms";
 import RenderAllMessages from "./Components/RenderAllMessages";
-import Login from "./Components/Login";
+import Login from "./Components/LoginComponents/Login";
 import ProfileSettings from "./Components/ProfileSettings";
 import "./App.css";
 import CreateRoom from "./Components/CreateRoom";

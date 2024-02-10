@@ -1,9 +1,11 @@
 import axios from "axios";
-import "../Styles/Login.css";
+import "../../Styles/Login.css";
 import React, { useState, useContext } from "react";
-import AnimationsContent from "./AnimationsContent";
-import AppContext from "../Context/AppContext";
-import { DisabledTransportError } from "@microsoft/signalr/dist/esm/Errors";
+import AnimationsContent from "../AnimationsContent";
+import AppContext from "../../Context/AppContext";
+import LoginForm from "./Other/LoginForm";
+import CreateAccount from "./Other/CreateAccount";
+
 const Login = () => {
   const { login, setLogin, isLoged, setIsLoged, setUsername, setUserInfo, userInfo } = useContext(AppContext);
 
@@ -67,18 +69,19 @@ const Login = () => {
         setUserInfo(newUserData);
       } else {
         console.error(`Unexpected response status: ${response.AxiosError}`);
-        throw new Error (response.AxiosError)
-        
+        throw new Error(response.AxiosError)
+
 
       }
     } catch (error) {
       console.log("An error occurred during login:", error.response.data);
+      console.log(error)
       var _stringMessage;
       if (error.response && error.response.data) {
         _stringMessage = `An error occurred: ${error.response.data}`;
       } else {
         _stringMessage = "An unknown error occurred during login.";
-      }      showError(_stringMessage);
+      } showError(_stringMessage);
     }
   };
 
@@ -92,58 +95,15 @@ const Login = () => {
             <p>{errorMessage}</p>
           </div>)
         }
-        <form className="RigthLoginConteiner" action="#">
-          <h1>Dive in full bullshit!</h1>
-          <h4>
-            Make sure <br /> you ready!
-          </h4>
+        {true ? <CreateAccount /> : <LoginForm
+          setNameInput={setNameInput}
+          setEmailInput={setEmailInput}
+          setPasswordInput={setPasswordInput}
+          handlerLoginPost={handlerLoginPost}
+          setUsername={setUsername}
+          setIsLoged={setIsLoged}
+        />}
 
-          <input
-            type="text"
-            name="username"
-            placeholder="User Name"
-            onChange={(e) => {
-              e.preventDefault();
-              // setUsername(e.target.value.trim());
-              setNameInput(e.target.value)
-            }}
-          />
-
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            onChange={(e) => {
-              e.preventDefault();
-              setEmailInput(e.target.value);
-            }}
-          />
-          <input
-            type="password"
-            name="passord"
-            placeholder="Passord"
-            onChange={(e) => {
-              e.preventDefault();
-              setPasswordInput(e.target.value);
-            }}
-          />
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              // handlerLogin();
-              handlerLoginPost()
-            }}
-          >
-            LOGIN
-          </button>
-
-          {/* anonim login buton */}
-          <button onClick={(e) => {
-            e.preventDefault();
-            setUsername("<anonim user!>")
-            setIsLoged(true);
-          }} >Anonim Login</button>
-        </form>
       </div>
     </React.Fragment>
   );
