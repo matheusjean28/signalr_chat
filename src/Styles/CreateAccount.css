@@ -1,3 +1,7 @@
+/* https://uiverse.io/ammarsaa/chatty-firefox-25 */
+/* this card was made by 
+ammarsaa, get this link to orignal post at uiverse.io */
+
 .ConteinerRigth{
   height: 90%;
   display: flex;
@@ -10,7 +14,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  max-width: 300px;
+  max-width: 325px;
   height: 450px;
   padding: 20px;
   border-radius: 20px;
@@ -31,7 +35,7 @@
   display: flex;
   align-items: center;
   padding-left: 30px;
-  color: #00bfff;
+  color: rebeccapurple;
 }
 
 .title::before {
@@ -53,13 +57,13 @@
   width: 16px;
   border-radius: 50%;
   left: 0px;
-  background-color: #00bfff;
+  background-color: rebeccapurple;
 }
 
 .message, 
 .signin {
   font-size: 14.5px;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(249, 236, 236, 0.879);
 }
 
 .signin {
@@ -67,11 +71,11 @@
 }
 
 .signin a:hover {
-  text-decoration: underline royalblue;
+  text-decoration: underline rgb(13, 63, 212);
 }
 
 .signin a {
-  color: #00bfff;
+  color: rebeccapurple;
 }
 
 .flex {
@@ -87,17 +91,17 @@
 }
 
 .form label .input {
-  background-color: #333;
-  color: #fff;
+  background-color: #171717;
+  color: #ffffffd0;
   width: 100%;
   padding: 20px 05px 05px 5px;
   outline: 0;
-  border: 1px solid rgba(105, 105, 105, 0.397);
+  border: 1px solid rgba(105, 105, 105, 0.83);
   border-radius: 10px;
 }
 
 .form label .input + span {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgb(255, 255, 255);
   position: absolute;
   left: 10px;
   top: 0px;
@@ -113,14 +117,14 @@
 
 .form label .input:focus + span,
 .form label .input:valid + span {
-  color: #00bfff;
+  color: rgb(128, 0, 255);
   top: 0px;
   font-size: 0.7em;
-  font-weight: 600;
+  font-weight: bold;
 }
 
 .input {
-  font-size: medium;
+  font-size: small;
 }
 
 .submit {
@@ -131,11 +135,11 @@
   color: #fff;
   font-size: 16px;
   transform: .3s ease;
-  background-color: #00bfff;
+  background-color: rebeccapurple;
 }
 
 .submit:hover {
-  background-color: #00bfff96;
+  background-color: rgba(102, 51, 153, 0.765);
 }
 
 @keyframes pulse {

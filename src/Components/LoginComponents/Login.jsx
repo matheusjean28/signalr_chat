@@ -7,13 +7,9 @@ import LoginForm from "./Other/LoginForm";
 import CreateAccount from "./Other/CreateAccount";
 
 const Login = () => {
-  const { login, setLogin, isLoged, setIsLoged, setUsername, setUserInfo, userInfo } = useContext(AppContext);
+  const {  setIsLoged, setUsername, setUserInfo } = useContext(AppContext);
+  const [isCreatingAnAcoCunt, setIsCreatingAnAcoCunt] = useState(false);
 
-  const [loginCreadentials, setLoginCreadentials] = useState({
-    name: String,
-    email: String,
-    password: String,
-  });
   /*to compose login credential */
   const [name, setName] = useState(false);
   const [email, setEmail] = useState(false);
@@ -26,16 +22,6 @@ const Login = () => {
 
   // error message to display
   const [errorMessage, setErrorMessage] = useState("");
-
-
-  const isStrongPassword = (password) => {
-    const hasLength = password.length >= 8;
-    const hasUppercase = /[A-Z]/.test(password);
-    const hasLowercase = /[a-z]/.test(password);
-    const hasNumber = /\d/.test(password);
-    return hasLength && hasUppercase && hasLowercase && hasNumber;
-  };
-
 
   const showError = (errorMessage) => {
     setErrorMessage(errorMessage);
@@ -95,13 +81,19 @@ const Login = () => {
             <p>{errorMessage}</p>
           </div>)
         }
-        {true ? <CreateAccount /> : <LoginForm
+        {isCreatingAnAcoCunt ? <CreateAccount 
+        isCreatingAnAcoCunt={isCreatingAnAcoCunt}
+        setIsCreatingAnAcoCunt={setIsCreatingAnAcoCunt}
+        /> : <LoginForm
           setNameInput={setNameInput}
           setEmailInput={setEmailInput}
           setPasswordInput={setPasswordInput}
           handlerLoginPost={handlerLoginPost}
           setUsername={setUsername}
           setIsLoged={setIsLoged}
+          isCreatingAnAcoCunt={isCreatingAnAcoCunt}
+          setIsCreatingAnAcoCunt={setIsCreatingAnAcoCunt}
+
         />}
 
       </div>

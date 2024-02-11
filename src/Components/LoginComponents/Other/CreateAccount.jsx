@@ -1,6 +1,14 @@
 import '../../../Styles/CreateAccount.css'
 
-const CreateAccount = () => {
+const CreateAccount = ({ isCreatingAnAcoCunt,
+    setIsCreatingAnAcoCunt }) => {
+    const isStrongPassword = (password) => {
+        const hasLength = password.length >= 8;
+        const hasUppercase = /[A-Z]/.test(password);
+        const hasLowercase = /[a-z]/.test(password);
+        const hasNumber = /\d/.test(password);
+        return hasLength && hasUppercase && hasLowercase && hasNumber;
+    };
     return (
         <div className="ConteinerRigth">
 
@@ -33,7 +41,11 @@ const CreateAccount = () => {
                     <span>Confirm password</span>
                 </label>
                 <button class="submit">Submit</button>
-                <p class="signin">Already have an acount ? <a href="#">Signin</a> </p>
+                <p class="signin">Already have an acount ? <a onClick={(e) => {
+                    e.preventDefault(
+                        setIsCreatingAnAcoCunt(false)
+                    )
+                }} href="#">Signin</a> </p>
             </form>
         </div>
     )

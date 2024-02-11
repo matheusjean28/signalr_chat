@@ -1,52 +1,39 @@
 .LoginConteiner {
     position: relative;
-
     display: grid;
     grid-template-columns: 2fr 1fr;
-
     height: 100%;
     background-color: #242424;
-
     gap: 0 10px;
-
-    
 }
 
-
-/* when login error ocurred */
+/* Error message */
 .errorLogin {
     position: absolute;
     bottom: 4%;
     left: 35%;
     right: 45%;
-
     width: 30%;
     height: 80px;
-
     border-radius: 10px;
     background-color: rgba(232, 63, 63, 0.533);
-
     padding: 5px;
     place-items: center;
     display: flex;
     place-content: center;
-}
-.errorLogin {
     transition: all cubic-bezier(0.075, 0.82, 0.165, 5);
 }
 
-/*left*/
+/* Left side */
 .LeftLoginConteiner {
     display: flex;
     position: relative;
-
     height: 100%;
     flex-direction: column;
-
     place-items: right;
-
     border-radius: 5px;
 }
+
 .JoinLeft {
     color: rebeccapurple;
     font-weight: bolder;
@@ -56,37 +43,192 @@
 
 .LeftLoginConteinerImg {
     position: absolute;
-
     left: 50%;
-
     height: 150px;
     width: 150px;
 }
 
-/*rigth*/
+/* Right side */
 .RigthLoginConteiner {
-    padding: 5px;
+    padding: 20px;
     gap: 10px 0;
     display: flex;
     flex-direction: column;
-
     place-content: center;
     place-items: center;
+    max-width: 325px;
+    height: 450px;
+    background-color: #1a1a1a;
+    color: #fff;
+    border: 1px solid #333;
+    border-radius: 20px;
+    position: relative;
+    margin-top: 25px;
+
+    padding-bottom: 50px;
+}
+
+.RigthLoginDecoration {
+    color: rebeccapurple;
+}
+
+/* Input labels */
+label {
+    height: 40px;
+    width: 270px;
+}
+
+.input {
+    padding: 10px 50px 0 50px;
+    color: rgba(245, 245, 245, 0.712);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.RigthLoginConteiner label {
+    position: relative;
+    place-items: center;
+    display: flex;
+}
+
+.RigthLoginConteiner label .input {
+    background-color: #171717;
+    max-width: 100%;
+    height: 20px;
+    width: 100%;
+    outline: 0;
+    margin-left: 5px;
+    margin-top: 5px;
+    border: 0.1px solid rgba(105, 105, 105, 0.83);
+    font-size: small;
+    border-radius: 10px;
+}
+
+.RigthLoginConteiner label .input + span {
+    margin-top: 1px;
+    color: rgb(128, 0, 255);
+    position: absolute;
+    left: 10px;
+    top: 0px;
+    font-size: small;
+    cursor: text;
+    transition: 0.3s ease;
+}
+
+.RigthLoginConteiner label .input:placeholder-shown + span {
+    top: 12.5px;
+    margin-bottom: 5px;
+    font-size: x-small;
+}
+
+.RigthLoginConteiner label .input:focus + span,
+.RigthLoginConteiner label .input:valid + span {
+    color: rgb(128, 0, 255);
+    top: 0px;
+    font-size: small;
+    font-weight: 400;
 }
 
 .RigthLoginConteiner input {
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-
     padding: 10px 5px;
     border-radius: 10px;
     width: 80%;
 }
 
 .RigthLoginConteiner > button {
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-
     padding: 10px 50px;
+    background-color: rgb(128, 0, 255);
     border-radius: 15px;
+    border: none;
+    outline: 0;
+    font-weight: 700;
+}
+
+.create {
+    display: flex;
+    place-content: center;
+    place-items: center;
+    font-size: smaller;
+    gap: 5px;
+    font-style: italic;
+}
+
+/* Card animation */
+.spinner {
+    position: absolute;
+    top: 45%;
+    right: 10px;
+    background-image: linear-gradient(rgb(186, 66, 255) 35%, rgb(0, 225, 255));
+    width: 50px;
+    height: 50px;
+    animation: spinning82341 1.7s linear infinite;
+    text-align: center;
+    border-radius: 100%;
+    filter: blur(1px);
+    box-shadow:
+        0px -5px 20px 0px rgb(186, 66, 255),
+        0px 5px 20px 0px rgb(0, 225, 255);
+}
+
+.spinner1 {
+    background-color: rgb(36, 36, 36);
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    filter: blur(10px);
+}
+
+/* Keyframes */
+@keyframes spinning82341 {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes move {
+    0% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(4px, 6px);
+    }
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes blink {
+    20% {
+        transform: translate(0, 0);
+        height: 2rem;
+    }
+    30% {
+        height: 0;
+    }
+    40% {
+        transform: translate(5px, 10px);
+        height: 0;
+    }
+    50% {
+        height: 2rem;
+    }
+    70% {
+        transform: translate(-10px, -10px);
+    }
+    90% {
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.5;
+    }
 }
 
 /*card animation from iuverse.io*/
