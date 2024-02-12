@@ -3,7 +3,7 @@
 ammarsaa, get this link to orignal post at uiverse.io */
 
 .ConteinerRigth{
-  height: 90%;
+  height: 100%;
   display: flex;
 
   place-content: center;
@@ -13,17 +13,18 @@ ammarsaa, get this link to orignal post at uiverse.io */
 .form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  max-width: 325px;
-  height: 450px;
+  gap: 10px 0;
   padding: 20px;
-  border-radius: 20px;
+  max-width: 325px;
+  height: 430px;
+  
+  place-content: center;
+  place-items: center;
   position: relative;
   background-color: #1a1a1a;
   color: #fff;
+  border-radius: 20px;
   border: 1px solid #333;
-
-  margin-top: 25px;
   padding-bottom: 50px;
 }
 

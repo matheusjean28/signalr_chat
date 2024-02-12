@@ -12,3 +12,22 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+
+
+/* Error message */
+.errorLogin {
+  position: absolute;
+  bottom: 4%;
+  left: 35%;
+  right: 45%;
+  width: 30%;
+  height: 80px;
+  border-radius: 10px;
+  background-color: rgba(232, 63, 63, 0.533);
+  padding: 5px;
+  place-items: center;
+  display: flex;
+  place-content: center;
+  transition: all cubic-bezier(0.075, 0.82, 0.165, 5);
+}
