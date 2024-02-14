@@ -7,6 +7,8 @@ import Login from "./Components/LoginComponents/Login";
 import ProfileSettings from "./Components/ProfileSettings";
 import "./App.css";
 import CreateRoom from "./Components/CreateRoom";
+import ConnectionTokenHandler from "./ConnectionMethods/ConnectionTokenHandler";
+
 
 function App() {
   const [username, setUsername] = useState("");
@@ -30,7 +32,9 @@ function App() {
     Gender: "asdf",
     bio: "Lorem ipsum dolor sit, amet consectetur adipisicing elit.",
   });
+
   useEffect(() => {
+    
     const newConnection = new signalR.HubConnectionBuilder()
       .withUrl("http://localhost:5178/chatHub")
       .configureLogging(signalR.LogLevel.Information)
@@ -53,12 +57,21 @@ function App() {
       });
   }, [setConnection, isLoged, isInARoom]);
 
+
+  
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    if (storedToken) {
+      setIsLoged(true);
+    }
+  }, []);
+
+ 
+
   //called when connection goes wrong
   const handleReconnection = async (connection) => {
-    console.log("Trying to reconnect...");
     try {
       await connection.start();
-      console.log("Reconnected successfully!");
     } catch (error) {
       console.error("Error reconnecting:", error);
       setTimeout(() => handleReconnection(), 1000);
@@ -92,16 +105,6 @@ function App() {
         setRecivedMessages,
       }}
     >
-      {/*
-      create an icon to show for user what is your current state connection
-      {connection === null ? (
-        <h3 className="ConnectionStatus">disconnected</h3>
-      ) : (
-        <h3 className="ConnectionStatus conected">{`${connection.state}`}</h3>
-      )} */}
-
-
-
 
       {isLoged ? (
         //yes

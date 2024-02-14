@@ -7,7 +7,7 @@ import { onJoinRoomAsyn }
   from '../ConnectionMethods/OnConnetionCalled';
 
 const ChatRooms = () => {
-  const { connection, isInARoom, setIsInARoom, setChatName, userInfo, setCurrentChat, setConnection, currentChat } =
+  const { connection,token, isInARoom, setIsInARoom, setChatName, userInfo, setCurrentChat, setConnection, currentChat } =
     useContext(AppContext);
   const [availableRooms, setAvailableRooms] = useState([]);
 
@@ -34,7 +34,13 @@ const ChatRooms = () => {
   useEffect(() => {
     const fetchRooms = async () => {
       try {
-        const response = await fetch("http://localhost:5178/GetAllRooms");
+        var _token = localStorage.getItem('token');
+        const response = await fetch("http://localhost:5178/GetAllRooms",{
+          method: "GET",
+          headers: {
+            "Authorization": `Bearer ${_token}`
+          }}
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch rooms");
         }
@@ -81,7 +87,6 @@ const ChatRooms = () => {
 
                   //Try to join at the room, if not allow, server return an error
                   //parms:
-                  // console.log(userInfo.Id, currentChat, "Connection id Value", connection.connectionId)
                  await connection.invoke("JoinChat", userInfo.Id,
                   room.chatID);
                 }}

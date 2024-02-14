@@ -9,7 +9,7 @@ const RenderAllMessages = () => {
 
 
   connection.on("AddToGroup", (response) => {
-    // console.log(response)
+    console.log(response)
   })
 
 
@@ -26,7 +26,6 @@ const RenderAllMessages = () => {
     connection.on("errormessage", (error) => {
     })
 
-  // console.log(mensagens)
 
   // If last message is from the same user, don't render the "You" label
   const shouldRenderYouLabel =

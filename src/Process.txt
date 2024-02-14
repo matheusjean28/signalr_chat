@@ -4,3 +4,7 @@ left all funcions about connection inside an object that can handle connection
 2- call join room method -- ok
 3- check if is in a romm  -- ok
 4- try to send a message -- ok is sending 
+
+
+check state of fields on try to connect again if user already logged in and token is valid,
+other way set isLogged as false, and user will need to make login again.

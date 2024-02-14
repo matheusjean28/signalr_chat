@@ -3,9 +3,10 @@ import { useState, useContext } from 'react';
 import ProfileSettings from "./ProfileSettings";
 import axios from 'axios';
 import AppContext from '../Context/AppContext';
+import ConnectionTokenHandler from '../ConnectionMethods/ConnectionTokenHandler';
 
 const CreateRoom = () => {
-    const { userInfo } = useContext(AppContext);
+    const { userInfo, token } = useContext(AppContext);
 
     //replace when run build
     // const apiUrl = process.env.REACT_APP_API_URL;
@@ -86,10 +87,16 @@ const CreateRoom = () => {
             isValidDesc) {
             console.log("creating a room")
             try {
+
                 const resp = await axios.post(`http://localhost:5178/CreateRoom?`, {
                     chatName: chatName,
                     onlineUser: maxUser,
                     userId: userInfo.Id,
+                },{
+                        method: "POST",
+                        headers: {
+                          "Authorization": `Bearer ${localStorage.getItem('tokn')}`
+                        }
                 });
                 if (resp.status !== 200) {
                     showError("resp");

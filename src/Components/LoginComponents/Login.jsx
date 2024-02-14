@@ -5,9 +5,10 @@ import AnimationsContent from "../AnimationsContent";
 import AppContext from "../../Context/AppContext";
 import LoginForm from "./Other/LoginForm";
 import CreateAccount from "./Other/CreateAccount";
+import ConnectionTokenHandler from "../../ConnectionMethods/ConnectionTokenHandler";
 
 const Login = () => {
-  const {  setIsLoged, setUsername, setUserInfo } = useContext(AppContext);
+  const {  setIsLoged, setUsername, setUserInfo,  } = useContext(AppContext);
   const [isCreatingAnAcoCunt, setIsCreatingAnAcoCunt] = useState(false);
 
   /*to compose login credential */
@@ -33,7 +34,6 @@ const Login = () => {
 
   const handlerLoginPost = async () => {
     try {
-      console.log(passwordInput, nameInput)
       const response = await axios.post(`http://localhost:5178/Auth`, {
         UserName: nameInput,
         Email: emailInput,
@@ -42,6 +42,7 @@ const Login = () => {
 
       if (response.status === 200) {
         setUsername(response.data.userName);
+        localStorage.setItem('token', response.data.token.token)
         setIsLoged(true);
 
         const newUserData = {
@@ -51,7 +52,7 @@ const Login = () => {
           Gender: "",
           bio: "",
         };
-        console.log(response)
+
         setUserInfo(newUserData);
       } else {
         console.error(`Unexpected response status: ${response.AxiosError}`);
@@ -81,7 +82,7 @@ const Login = () => {
             <p>{errorMessage}</p>
           </div>)
         }
-        {true ? <CreateAccount 
+        {isCreatingAnAcoCunt ? <CreateAccount 
         isCreatingAnAcoCunt={isCreatingAnAcoCunt}
         setIsCreatingAnAcoCunt={setIsCreatingAnAcoCunt}
         /> : <LoginForm
