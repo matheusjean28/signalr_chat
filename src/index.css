@@ -31,3 +31,34 @@
   place-content: center;
   transition: all cubic-bezier(0.075, 0.82, 0.165, 5);
 }
+
+/* connstion status <p> 
+defoult connected color*/
+.ConnectionStatus{
+  position: absolute;
+  font-size: smaller;
+
+  background-color: rgb(57, 151, 57);
+  border-radius: 5px;
+  padding: 1px 5px;
+  place-content: center;
+  place-items: center;
+  display: flex;
+
+  top: -30px;
+
+  font-weight: 500;
+}
+
+.Connecting{
+  background-color: aquamarine;
+}
+.Disconnecting{
+  background-color: gray;
+}
+.Reconnecting{
+  background-color: rgb(214, 71, 0);
+}
+.Disconnected{
+  background-color: rgba(255, 0, 0, 0.573);
+}

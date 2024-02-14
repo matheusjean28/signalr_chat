@@ -11,10 +11,6 @@ const Login = () => {
   const {  setIsLoged, setUsername, setUserInfo,  } = useContext(AppContext);
   const [isCreatingAnAcoCunt, setIsCreatingAnAcoCunt] = useState(false);
 
-  /*to compose login credential */
-  const [name, setName] = useState(false);
-  const [email, setEmail] = useState(false);
-  const [password, setPassword] = useState(false);
 
   /*to compose user input */
   const [nameInput, setNameInput] = useState("");
@@ -55,14 +51,11 @@ const Login = () => {
 
         setUserInfo(newUserData);
       } else {
-        console.error(`Unexpected response status: ${response.AxiosError}`);
         throw new Error(response.AxiosError)
 
 
       }
     } catch (error) {
-      console.log("An error occurred during login:", error.response.data);
-      console.log(error)
       var _stringMessage;
       if (error.response && error.response.data) {
         _stringMessage = `An error occurred: ${error.response.data}`;

@@ -7,12 +7,14 @@ import Login from "./Components/LoginComponents/Login";
 import ProfileSettings from "./Components/ProfileSettings";
 import "./App.css";
 import CreateRoom from "./Components/CreateRoom";
-import ConnectionTokenHandler from "./ConnectionMethods/ConnectionTokenHandler";
+import ScreenErrorComponent from "./Components/ErrorComponent/ScreenErrorComponent";
+import ConnectionStatus from "./Components/ConnectionStatus/ConnectionStatus";
 
 
 function App() {
   const [username, setUsername] = useState("");
   const [connection, setConnection] = useState(null);
+  const [stateConnection, setStateConnection] = useState(null)
   const [recivedMessages, setRecivedMessages] = useState([]);
   const [login, setLogin] = useState({
     name: "",
@@ -33,97 +35,152 @@ function App() {
     bio: "Lorem ipsum dolor sit, amet consectetur adipisicing elit.",
   });
 
+  const [renderError, setRenderError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+
   useEffect(() => {
-    
     const newConnection = new signalR.HubConnectionBuilder()
       .withUrl("http://localhost:5178/chatHub")
-      .configureLogging(signalR.LogLevel.Information)
       .withAutomaticReconnect()
       .build();
-
+  
+      
+    newConnection.onreconnecting(() => {
+      setStateConnection("Reconnecting");
+    });
+  
+    newConnection.onreconnected(() => {
+      setStateConnection("Connected");
+    });
+  
+    newConnection.onclose(async () => {
+      console.log("call reconnection cause disconnected");
+      await handleReconnection(newConnection);
+    });
+  
     newConnection
       .start()
       .then(() => {
         setConnection(newConnection);
-        newConnection.onclose(async () => {
-          console.log("call reconnection cause disconnected");
-          await handleReconnection(connection);
-
-        });
+        setStateConnection("Connected");
       })
       .catch((error) => {
         console.error(error);
-        setTimeout(() => handleReconnection(), 5000);
+        setRenderError(true);
+        setErrorMessage("Failed to connect to the server.");
+        setTimeout(() => handleReconnection(newConnection), 5000);
       });
-  }, [setConnection, isLoged, isInARoom]);
-
+  
+    return () => {
+    };
+  }, []);
 
   
+  //leave this to first, will set as null
+  useEffect(() => {
+    setStateConnection(connection?.state);
+  }, [connection]);
 
   //called when connection goes wrong
   const handleReconnection = async (connection) => {
     try {
       await connection.start();
+      if (connection.connection.state === "Connected") {
+        setRenderError(false);
+        setErrorMessage("");
+      }
     } catch (error) {
       console.error("Error reconnecting:", error);
-      setTimeout(() => handleReconnection(), 1000);
+      setRenderError(true);
+      setErrorMessage("Failed to reconnect.");
+      setTimeout(handleReconnection, 1000);
     }
   };
 
-  return (
-    <AppContext.Provider
-      value={{
-        isCreatingARoom,
-        setCreatingARoom,
-        currentChat,
-        setCurrentChat,
-        isEditing,
-        setIsEditing,
-        userInfo,
-        setUserInfo,
-        chatName,
-        setChatName,
-        isInARoom,
-        setIsInARoom,
-        isLoged,
-        setIsLoged,
-        login,
-        setLogin,
-        connection,
-        setConnection,
-        username,
-        setUsername,
-        recivedMessages,
-        setRecivedMessages,
-      }}
-    >
+  try {
+    return (
+      <AppContext.Provider
+        value={{
+          stateConnection, setStateConnection,
+          isCreatingARoom,
+          setCreatingARoom,
+          currentChat,
+          setCurrentChat,
+          isEditing,
+          setIsEditing,
+          userInfo,
+          setUserInfo,
+          chatName,
+          setChatName,
+          isInARoom,
+          setIsInARoom,
+          isLoged,
+          setIsLoged,
+          login,
+          setLogin,
+          connection,
+          setConnection,
+          username,
+          setUsername,
+          recivedMessages,
+          setRecivedMessages,
+          renderError,
+          setRenderError,
+          errorMessage,
+          setErrorMessage
+        }}
+      >
 
-      {isLoged ? (
-        //yes
-        isCreatingARoom ? (
-          //yes
-          <CreateRoom />
-        ) :
+        {isLoged ? <ConnectionStatus /> : ""}
+        {
+          renderError ? <ScreenErrorComponent errorMessage={errorMessage} /> :
+            isLoged ? (
+              //yes{}
+              (
+                isCreatingARoom ? (
+                  //yes
+                  <CreateRoom />
+                ) :
 
-          (isInARoom ? (
-            //yes
-            (
-              <div className="MainGrid">
-                <h2 className="MainGridChatName">{chatName}</h2>
-                <RenderAllMessages />
-                <ProfileSettings />
-              </div>
+                  (isInARoom ? (
+                    //yes
+                    (
+                      <div className="MainGrid">
+                        <h2 className="MainGridChatName">{chatName}</h2>
+                        <RenderAllMessages />
+                        <ProfileSettings />
+                      </div>
+                    )
+                  ) : (
+                    <ChatRooms />
+                  )
+                  )
+              )) : (
+              <Login />
             )
-          ) : (
-            <ChatRooms />
-          )
-          )
-      ) : (
-        <Login />
-      )}
 
-    </AppContext.Provider>
-  );
+        }
+
+      </AppContext.Provider>
+    );
+  } catch (error) {
+    console.log(error)
+    return (
+      <AppContext.Provider value={
+        {
+          setRenderError,
+          setErrorMessage,
+          renderError,
+          errorMessage
+        }}>
+        setRenderError(true);
+        setErrorMessage("Failed to render main component.");
+        <ScreenErrorComponent />
+      </AppContext.Provider >)
+  }
+
+
 }
 
 export default App;
