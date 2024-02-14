@@ -59,14 +59,6 @@ function App() {
 
 
   
-  useEffect(() => {
-    const storedToken = localStorage.getItem('token');
-    if (storedToken) {
-      setIsLoged(true);
-    }
-  }, []);
-
- 
 
   //called when connection goes wrong
   const handleReconnection = async (connection) => {
