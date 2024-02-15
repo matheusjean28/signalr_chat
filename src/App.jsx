@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import * as signalR from "@microsoft/signalr";
+import { React, useEffect, useState, signalR } from "./imports";
+
 import AppContext from "./Context/AppContext";
 import ChatRooms from "./Components/ChatRooms";
 import RenderAllMessages from "./Components/RenderAllMessages";
@@ -9,9 +9,12 @@ import "./App.css";
 import CreateRoom from "./Components/CreateRoom";
 import ScreenErrorComponent from "./Components/ErrorComponent/ScreenErrorComponent";
 import ConnectionStatus from "./Components/ConnectionStatus/ConnectionStatus";
+import ErrorPopup from "./Components/ErrorComponent/ErrorPopup";
 
 
 function App() {
+  
+  //make a file to handle this 'consts'
   const [username, setUsername] = useState("");
   const [connection, setConnection] = useState(null);
   const [stateConnection, setStateConnection] = useState(null)
@@ -38,27 +41,26 @@ function App() {
   const [renderError, setRenderError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-
   useEffect(() => {
     const newConnection = new signalR.HubConnectionBuilder()
       .withUrl("http://localhost:5178/chatHub")
       .withAutomaticReconnect()
       .build();
-  
-      
+
+
     newConnection.onreconnecting(() => {
       setStateConnection("Reconnecting");
     });
-  
+
     newConnection.onreconnected(() => {
       setStateConnection("Connected");
     });
-  
+
     newConnection.onclose(async () => {
       console.log("call reconnection cause disconnected");
       await handleReconnection(newConnection);
     });
-  
+
     newConnection
       .start()
       .then(() => {
@@ -71,12 +73,18 @@ function App() {
         setErrorMessage("Failed to connect to the server.");
         setTimeout(() => handleReconnection(newConnection), 5000);
       });
-  
+
     return () => {
     };
   }, []);
 
-  
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setErrorMessage('');
+    }, 9000);
+    return () => clearTimeout(timer);
+  }, [errorMessage]);
+
   //leave this to first, will set as null
   useEffect(() => {
     setStateConnection(connection?.state);
@@ -92,6 +100,7 @@ function App() {
       }
     } catch (error) {
       console.error("Error reconnecting:", error);
+      setErrorMessage(error)
       setRenderError(true);
       setErrorMessage("Failed to reconnect.");
       setTimeout(handleReconnection, 1000);
@@ -128,10 +137,10 @@ function App() {
           renderError,
           setRenderError,
           errorMessage,
-          setErrorMessage
+          setErrorMessage,
         }}
       >
-
+        {errorMessage && (<ErrorPopup />)}
         {isLoged ? <ConnectionStatus /> : ""}
         {
           renderError ? <ScreenErrorComponent errorMessage={errorMessage} /> :

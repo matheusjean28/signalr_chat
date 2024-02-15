@@ -17,19 +17,22 @@
 
 /* Error message */
 .errorLogin {
+  z-index: 10000;
   position: absolute;
   bottom: 4%;
   left: 35%;
   right: 45%;
-  width: 30%;
-  height: 80px;
+  color: #CCCCCC;
+  font-weight: 600;
+  
+  max-height: 50px;
+  width: auto;
+  height: auto;
   border-radius: 10px;
-  background-color: rgba(232, 63, 63, 0.533);
-  padding: 5px;
-  place-items: center;
+  background-color: #FF0000;
   display: flex;
   place-content: center;
-  transition: all cubic-bezier(0.075, 0.82, 0.165, 5);
+  transition: all ease-in-out .5s;
 }
 
 /* connstion status <p> 

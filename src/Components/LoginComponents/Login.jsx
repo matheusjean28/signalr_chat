@@ -5,7 +5,6 @@ import AnimationsContent from "../AnimationsContent";
 import AppContext from "../../Context/AppContext";
 import LoginForm from "./Other/LoginForm";
 import CreateAccount from "./Other/CreateAccount";
-import ConnectionTokenHandler from "../../ConnectionMethods/ConnectionTokenHandler";
 
 const Login = () => {
   const {  setIsLoged, setUsername, setUserInfo,  } = useContext(AppContext);
