@@ -5,7 +5,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #040206;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -70,3 +70,20 @@ defoult connected color*/
 .Disconnected{
   background-color: rgba(255, 0, 0, 0.573);
 }
+
+
+/* CVS */
+
+/* 02187b,0246a7,164de5,1e89ef,5cdffb */
+
+/* CVS with # */
+
+/* #02187b,#0246a7,#164de5,#1e89ef,#5cdffb */
+
+/* Array */
+
+/* ["02187b", "0246a7", "164de5", "1e89ef", "5cdffb"] */
+
+/* Array with # */
+
+/* ["#02187b", "#0246a7", "#164de5", "#1e89ef", "#5cdffb"] */

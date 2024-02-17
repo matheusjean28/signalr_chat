@@ -55,7 +55,7 @@ const CreateAccount = ({ setIsCreatingAnAcoCunt, }) => {
         } else {
             setPassword(confirmePass)
         }
-
+        
         const trimmLastName = lastName.trim();
         const trimmFirstName = firstName.trim();
         if (trimmFirstName.concat(trimmLastName).length >= 8) {
