@@ -4,8 +4,8 @@ import CreateAccountMethod from '../../../Functions/CreateAccountMethod';
 
 import { useContext, useState } from 'react';
 
-const CreateAccount = ({ isCreatingAnAcoCunt, setIsCreatingAnAcoCunt, }) => {
-    const { setErrorMessage, userInfo,setUserInfo,setIsLoged } = useContext(AppContext);
+const CreateAccount = ({ setIsCreatingAnAcoCunt, }) => {
+    const { setPopMessage, setUserInfo, setIsLoged } = useContext(AppContext);
 
     const [firstName, setFistName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -30,14 +30,13 @@ const CreateAccount = ({ isCreatingAnAcoCunt, setIsCreatingAnAcoCunt, }) => {
     }
 
     const checkDublePass = (pass, confirmePass) => {
-        console.log(pass, confirmePass);
         if (pass.trim() === confirmePass.trim()) {
             if (!isStrongPassword(confirmePass)) {
-                setErrorMessage("invalidPassWord");
+                setPopMessage("invalidPassWord");
                 return false;
             }
         } else {
-            setErrorMessage("Different pass");
+            setPopMessage("Different pass");
             return false;
         }
         return true;
@@ -45,15 +44,15 @@ const CreateAccount = ({ isCreatingAnAcoCunt, setIsCreatingAnAcoCunt, }) => {
 
     const sendCreateAcountMethod = async () => {
         if (!isAValidEmail(validEmail)) {
-            setErrorMessage('invalid Email');
+            setPopMessage('invalid Email');
             return;
-        }else {
+        } else {
             setEmail(validEmail)
         }
 
         if (!checkDublePass(pass, confirmePass)) {
             return;
-        }else {
+        } else {
             setPassword(confirmePass)
         }
 
@@ -62,16 +61,28 @@ const CreateAccount = ({ isCreatingAnAcoCunt, setIsCreatingAnAcoCunt, }) => {
         if (trimmFirstName.concat(trimmLastName).length >= 8) {
             setUserName(trimmFirstName.concat(trimmLastName));
         } else {
-            setErrorMessage('Invalid Username');
+            setPopMessage('Invalid Username');
             return;
-        } 
+        }
 
-        console.log(email, password, userName)
+        //call method to create acount     
         const _argCreate = await CreateAccountMethod(email, password, userName)
-        console.log("data at create: ",_argCreate )
         setUserInfo(_argCreate.data)
-        localStorage.setItem('token', await _argCreate.data.token.token )
-        setIsLoged(true);
+        localStorage.setItem('token', await _argCreate.data.token.token)
+        setPopMessage("Success at CreateAccount!");
+
+        //awai fecth end, and so check your responses
+        if (await _argCreate.status >= 200 && _argCreate.status < 300) {
+            setPopMessage("Sucess at CreateAccount!")
+            setTimeout(() => {
+                setPopMessage("");
+                setIsLoged(true);
+            }, 5000);
+        } else {
+            setPopMessage("Error", _argCreate.error)
+        }
+
+
     }
 
 

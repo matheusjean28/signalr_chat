@@ -39,7 +39,7 @@ function App() {
   });
 
   const [renderError, setRenderError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [popMessage, setPopMessage] = useState("");
 
   useEffect(() => {
     const newConnection = new signalR.HubConnectionBuilder()
@@ -70,7 +70,7 @@ function App() {
       .catch((error) => {
         console.error(error);
         setRenderError(true);
-        setErrorMessage("Failed to connect to the server.");
+        setPopMessage("Failed to connect to the server.");
         setTimeout(() => handleReconnection(newConnection), 5000);
       });
 
@@ -80,10 +80,10 @@ function App() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setErrorMessage('');
+      setPopMessage('');
     }, 9000);
     return () => clearTimeout(timer);
-  }, [errorMessage]);
+  }, [popMessage]);
 
   //leave this to first, will set as null
   useEffect(() => {
@@ -96,13 +96,13 @@ function App() {
       await connection.start();
       if (connection.connection.state === "Connected") {
         setRenderError(false);
-        setErrorMessage("");
+        setPopMessage("");
       }
     } catch (error) {
       console.error("Error reconnecting:", error);
-      setErrorMessage(error)
+      setPopMessage(error)
       setRenderError(true);
-      setErrorMessage("Failed to reconnect.");
+      setPopMessage("Failed to reconnect.");
       setTimeout(handleReconnection, 1000);
     }
   };
@@ -136,14 +136,14 @@ function App() {
           setRecivedMessages,
           renderError,
           setRenderError,
-          errorMessage,
-          setErrorMessage,
+          popMessage,
+          setPopMessage,
         }}
       >
-        {errorMessage && (<ErrorPopup />)}
+        {popMessage && (<ErrorPopup />)}
         {isLoged ? <ConnectionStatus /> : ""}
         {
-          renderError ? <ScreenErrorComponent errorMessage={errorMessage} /> :
+          renderError ? <ScreenErrorComponent popMessage={popMessage} /> :
             isLoged ? (
               //yes{}
               (
@@ -179,12 +179,12 @@ function App() {
       <AppContext.Provider value={
         {
           setRenderError,
-          setErrorMessage,
+          setPopMessage,
           renderError,
-          errorMessage
+          popMessage
         }}>
         setRenderError(true);
-        setErrorMessage("Failed to render main component.");
+        setPopMessage("Failed to render main component.");
         <ScreenErrorComponent />
       </AppContext.Provider >)
   }

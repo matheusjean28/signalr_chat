@@ -35,6 +35,11 @@
   transition: all ease-in-out .5s;
 }
 
+/* status when create is sucess or joined is sucess */
+.sucessLoginConnect{
+  background-color: #6B8E23;
+}
+
 /* connstion status <p> 
 defoult connected color*/
 .ConnectionStatus{
