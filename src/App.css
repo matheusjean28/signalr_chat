@@ -12,24 +12,23 @@
   border-radius: 8px;
 }
 
-
-.MainGrid{
+.MainGrid {
   display: grid;
   grid-template-columns: 5fr 2fr;
   height: 100%;
   width: 100%;
-  position: relative;
+  position: absolute;
+  background-color: #301849;
+  border-radius: 5px;
 }
 
 .MainGridChatName {
   position: absolute;
   top: 10px;
-  margin: 0 auto;  
+  margin: 0 auto;
   margin-left: 2px;
   color: #e4d7f1;
   padding: 5px 10px;
   width: 78%;
   border-radius: 10px;
 }
-
-

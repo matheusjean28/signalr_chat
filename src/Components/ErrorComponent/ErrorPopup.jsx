@@ -4,7 +4,7 @@ import '../../index.css'
 
 const PopUpMessage = () => {
     const { popMessage } = useContext(AppContext)
-    if (popMessage === "Sucess at CreateAccount!") {
+    if (popMessage === "Sucess at CreateAccount!" || popMessage === "Loggin Sucess") {
         return (
             <div className="errorLogin sucessLoginConnect">
                 <p>{popMessage}</p>

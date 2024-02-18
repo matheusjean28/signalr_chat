@@ -1,111 +1,152 @@
 .ProfileConteiner {
-    position: relative;
+  position: relative;
 
-    display: flex;
-    height: 100%;
-    width: 100%;
-    align-items: center;
-    gap: 0;
-    margin: 0;
-    flex-direction: column;
-    border-radius: 10px;
-
-    background-color: rgb(2, 147, 147);
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  gap: 0;
+  margin: 0;
+  flex-direction: column;
+  border-radius: 10px;
+  background-color: #301849;
 }
 .ProfileBackButton {
-    position: absolute;
-    top: 10px;
-    left: 10px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
 
-    font-weight: bolder;
-    text-align: center;
+  font-weight: bolder;
+  text-align: center;
 
-    padding: 1px 5px;
-    border-radius: 10px;
+  padding: 1px 5px;
+  background: none;
+  border: none;
 }
-.ProfileConteinerH4Bio {
-    margin: 0;
-    padding: 0;
+
+.CreateChatButton {
+position: absolute;
+bottom: 90px;
+
+  display: flex;
+  background: none;
+  color: white;
+  font-weight: bolder;
+  gap: 	10px;
+  border: none;
+  background-color: gray;
+  border: 1px solid gray;
+  border-radius: 5px;
+
+  margin: 0;
+  gap: 10px;
+
 }
+
 
 .ProfilePicture {
-    height: 80px;
-    width: 80px;
-
-    border-radius: 50%;
-
-    border: none;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  border: none;
 }
 
 .BioContent {
-    display: flex;
-    place-content: center;
-    place-items: left;
-    padding: 0 30px;
+  display: flex;
+  place-content: center;
+  place-items: left;
+  padding: 0 30px;
 
-    box-sizing: border-box;
-    width: inherit;
+  box-sizing: border-box;
+  width: inherit;
 
-    max-height: 200px;
-    overflow-y: auto; 
+  max-height: 200px;
+  overflow-y: auto;
 
-    word-wrap: break-word;
+  word-wrap: break-word;
 
-    text-overflow: ellipsis;
-
-    
+  text-overflow: ellipsis;
 }
 .BioContent::-webkit-scrollbar {
-    display: none;
-
+  display: none;
 }
 
 .ProfileInfos {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  width: inherit;
+}
+
+/*user username*/
+.spanUserName{
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    gap: 10px;
+}
+
+
+
+
+
+/*user bio*/
+.spanBio {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0 15px;
+  }
+ .bioSvg {
+    width: 70px;
+    height: 70px;
+}
+.spanBio, p {
+    margin-left: 10px;
+    font-size: 12px;
 }
 
 .EditProfile {
-    display: flex;
+  display: flex;
 
-    place-content: center;
-    place-items: center;
+  place-content: center;
+  place-items: center;
 
-    padding: 5px 10px;
-    border-radius: 5px;
+  padding: 5px 10px;
+  border-radius: 5px;
 
-    margin: 0;
-    gap: 10px;
+  margin: 0;
+  gap: 10px;
+  color: white;
 
-    background-color: gray;
-    border: 1px solid gray;
+  background-color: gray;
+  border: 1px solid gray;
 
-    position: absolute;
-    bottom: 50px;
+  position: absolute;
+  bottom: 50px;
 }
 
 .EditProfileH5 {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 .EditProfileImg {
-    display: flex;
-    width: 25px;
+  display: flex;
+  width: 25px;
 }
 .BioContentInput {
-    display: block;
-    place-content: start    ;
-    place-items: start;
-    
-    width: 70%;
+  display: block;
+  place-content: start;
+  place-items: start;
 
-    padding: 10px;
-    border: none;
+  width: 70%;
 
-    background-color: darkgray;
-    border-radius: 5px;
+  padding: 10px;
+  border: none;
 
-    overflow: auto;
-    box-sizing: border-box;
-    
+  background-color: darkgray;
+  border-radius: 5px;
+
+  overflow: auto;
+  box-sizing: border-box;
 }

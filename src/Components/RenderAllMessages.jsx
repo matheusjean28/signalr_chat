@@ -32,7 +32,7 @@ const RenderAllMessages = () => {
     mensagens.length === 0 || mensagens[mensagens.length - 1].user !== username;
 
   return (
-
+    <>
     <ul className="RenderMessageConteiner">
       {mensagens.map(({ user, userMessage  },index) => (
         <li
@@ -58,6 +58,8 @@ const RenderAllMessages = () => {
       ))}
       <ChatMain />
     </ul>
+    </>
+
   );
 };
 

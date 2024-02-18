@@ -4,7 +4,6 @@ import AppContext from "../../Context/AppContext";
 // obs: the file.css about this file is the same that index.css,
 //error warnings and ConnectionStatus are on the top of whole code
 
-
 const ConnectionStatus = () => {
     const {stateConnection } =useContext(AppContext);
 

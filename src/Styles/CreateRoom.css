@@ -34,7 +34,8 @@
     padding: 10px;
     
     border-radius: 8px;
-    background-color: rgb(96, 4, 189);
+    background-color: #301849;
+    
 
 
     place-content: center;
@@ -45,10 +46,10 @@
     padding: 5px 10px;
     border-radius: 5px;
     
-    background-color: aliceblue;
+    background-color: #4d2674;
     border: none;
-    color: black;
     font-weight: bold;
+    color: #f5f5f5;
 }
 
 .chatDesc{
@@ -56,10 +57,16 @@
  
 }
 .formBtnCreate {
-    padding: 8px 10px;
-    font-weight: bolder;
+    display:  flex;
+    place-content: center;
+    place-items: center;
+    padding: 5px 10px;
+
+    gap: 10px;
+    color: white;
+    font-size: 10px;
     
-    background-color: black;
+    background-color: #0c0612b7;
     border: none;
     border-radius: 8px  ;
 }
@@ -78,7 +85,7 @@
 
 
 .wrongField  {
-    background-color: rgba(255, 10, 10, 0.481);
+    background-color: #7a314a;
     border: 1px solid red;
 }
 

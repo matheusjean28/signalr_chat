@@ -2,8 +2,7 @@
     display: grid;
     grid-template-columns: 5fr 2fr;
     border: 1px solid #4d2674;
-    border-radius: 5px;
-    padding: 5px;
+    border-radius: 10px;
 
     height: 100%;
 }
@@ -89,12 +88,17 @@
 }
 
 .ChatListJoinButton {
-    border-radius: 50%;
     border: none;
-    background-color: #4d2674;
+    background:none;
     font-weight: bolder;
     font-size: smaller;
+    padding: 0;
 }
 .ChatListJoinButton:hover {
     background-color: #592c86;
+    background: none;
+    box-shadow: #615071 -0px 0px 30px 1px ;
+    border-radius: 100%;
+    margin: 0;
+    outline: 0;
 }

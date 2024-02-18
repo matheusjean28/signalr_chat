@@ -23,13 +23,14 @@
     color: #cccccc;
     font-weight: 600;
 
-    max-height: 50px;
     width: auto;
     height: auto;
     border-radius: 10px;
     background-color: #ff0000c6;
     display: flex;
     place-content: center;
+    place-items: center;
+    text-align: center;
     transition: all ease-in-out 0.5s;
 }
 
@@ -54,19 +55,24 @@ defoult connected color*/
     top: -30px;
 
     font-weight: 500;
+    z-index: 10000;
 }
 
 .Connecting {
     background-color: aquamarine;
+    z-index: 10000;
 }
 .Disconnecting {
     background-color: gray;
+    z-index: 10000;
 }
 .Reconnecting {
     background-color: rgb(214, 71, 0);
+    z-index: 10000;
 }
 .Disconnected {
     background-color: rgba(255, 0, 0, 0.573);
+    z-index: 10000;
 }
 
 /* CVS */

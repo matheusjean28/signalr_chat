@@ -3,7 +3,8 @@ import { useState, useContext } from 'react';
 import ProfileSettings from "./ProfileSettings";
 import axios from 'axios';
 import AppContext from '../Context/AppContext';
-import ConnectionTokenHandler from '../ConnectionMethods/ConnectionTokenHandler';
+import  { Plus, MessageSquareQuoteIcon} from 'lucide-react';
+
 
 const CreateRoom = () => {
     const { userInfo, token } = useContext(AppContext);
@@ -146,7 +147,7 @@ const CreateRoom = () => {
 
                     </div>)
                     : <form className="CreateChatForm">
-                        <h2>CREATE CHAT</h2>
+                        <h2>CREATE CHAT <MessageSquareQuoteIcon/> </h2>
                         <input onChange={(e) => {
                             e.preventDefault();
                             checkFields(e.target.value, "ChatName")
@@ -166,7 +167,9 @@ const CreateRoom = () => {
                                 isValidMaxUsers,
                                 isValidDesc,)
                             _createChat()
-                        }}>CREATE</button>
+                        }}>CREATE
+                        <Plus color='white' size={15}/>
+                        </button>
                     </form>}
 
 

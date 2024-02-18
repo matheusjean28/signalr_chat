@@ -7,7 +7,7 @@ import LoginForm from "./Other/LoginForm";
 import CreateAccount from "./Other/CreateAccount";
 
 const Login = () => {
-  const {  setIsLoged, setUsername, setUserInfo,  } = useContext(AppContext);
+  const {  setIsLoged, setUsername, setUserInfo, setPopMessage } = useContext(AppContext);
   const [isCreatingAnAcoCunt, setIsCreatingAnAcoCunt] = useState(false);
 
 
@@ -38,7 +38,11 @@ const Login = () => {
       if (response.status === 200) {
         setUsername(response.data.userName);
         localStorage.setItem('token', response.data.token.token)
-        setIsLoged(true);
+        setPopMessage("Loggin Sucess")
+        setTimeout(() => {
+          setPopMessage("");
+          setIsLoged(true);
+        }, 5000);
 
         const newUserData = {
           Id: response.data.id,
@@ -50,7 +54,8 @@ const Login = () => {
 
         setUserInfo(newUserData);
       } else {
-        throw new Error(response.AxiosError)
+        throw new Error(error)
+        
 
 
       }
@@ -58,8 +63,18 @@ const Login = () => {
       var _stringMessage;
       if (error.response && error.response.data) {
         _stringMessage = `An error occurred: ${error.response.data}`;
+        console.log(error.response.data)
+        setPopMessage(_stringMessage)
+        setTimeout(() => {
+          setPopMessage("");
+        }, 5000);
       } else {
         _stringMessage = "An unknown error occurred during login.";
+        setPopMessage(_stringMessage)
+        setTimeout(() => {
+          setPopMessage("");
+        }, 5000);
+
       } showError(_stringMessage);
     }
   };

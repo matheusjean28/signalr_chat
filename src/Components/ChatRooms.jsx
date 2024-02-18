@@ -1,10 +1,9 @@
+
 import React, { useContext, useState, useEffect } from "react";
-import * as signalR from "@microsoft/signalr";
 import AppContext from "../Context/AppContext";
 import ProfileSettings from "./ProfileSettings";
 import "../Styles/ChatRooms.css";
-import { onJoinRoomAsyn } from "../ConnectionMethods/OnConnetionCalled";
-
+import  { PlusCircle } from 'lucide-react';
 const ChatRooms = () => {
   const {
     connection,
@@ -99,7 +98,7 @@ const ChatRooms = () => {
 
                 }}
               >
-                {">"}
+                <PlusCircle color="white" size={15} />
               </button>
             </li>
           ))}
