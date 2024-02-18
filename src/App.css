@@ -3,18 +3,12 @@
   max-height: 500px;
   height: 100%;
   width: 100%;
-
   margin: 0;
   padding: 0;
-
-  background-color: #ccc;
-
   position: absolute;
-
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
   border-radius: 8px;
 }
 
@@ -22,10 +16,8 @@
 .MainGrid{
   display: grid;
   grid-template-columns: 5fr 2fr;
-
   height: 100%;
   width: 100%;
-
   position: relative;
 }
 
@@ -34,15 +26,10 @@
   top: 10px;
   margin: 0 auto;  
   margin-left: 2px;
-  color: gray;
+  color: #e4d7f1;
   padding: 5px 10px;
-  
   width: 78%;
-
   border-radius: 10px;
 }
 
 
-.conected {
-  background-color: rgba(6, 173, 6, 0.512);
-}

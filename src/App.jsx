@@ -1,11 +1,11 @@
 import { React, useEffect, useState, signalR } from "./imports";
 
+import "./App.css";
 import AppContext from "./Context/AppContext";
 import ChatRooms from "./Components/ChatRooms";
 import RenderAllMessages from "./Components/RenderAllMessages";
 import Login from "./Components/LoginComponents/Login";
 import ProfileSettings from "./Components/ProfileSettings";
-import "./App.css";
 import CreateRoom from "./Components/CreateRoom";
 import ScreenErrorComponent from "./Components/ErrorComponent/ScreenErrorComponent";
 import ConnectionStatus from "./Components/ConnectionStatus/ConnectionStatus";

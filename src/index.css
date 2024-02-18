@@ -1,76 +1,73 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #040206;
+    color-scheme: light dark;
+    color: rgba(255, 255, 255, 0.87);
+    background-color: #040206;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
-
-
 
 /* Error message */
 .errorLogin {
-  z-index: 10000;
-  position: absolute;
-  bottom: 4%;
-  left: 35%;
-  right: 45%;
-  color: #CCCCCC;
-  font-weight: 600;
-  
-  max-height: 50px;
-  width: auto;
-  height: auto;
-  border-radius: 10px;
-  background-color: #FF0000;
-  display: flex;
-  place-content: center;
-  transition: all ease-in-out .5s;
+    z-index: 10000;
+    position: absolute;
+    bottom: 4%;
+    left: 35%;
+    right: 45%;
+    color: #cccccc;
+    font-weight: 600;
+
+    max-height: 50px;
+    width: auto;
+    height: auto;
+    border-radius: 10px;
+    background-color: #ff0000c6;
+    display: flex;
+    place-content: center;
+    transition: all ease-in-out 0.5s;
 }
 
 /* status when create is sucess or joined is sucess */
-.sucessLoginConnect{
-  background-color: #6B8E23;
+.sucessLoginConnect {
+    background-color: rgb(57, 151, 57);
 }
 
 /* connstion status <p> 
 defoult connected color*/
-.ConnectionStatus{
-  position: absolute;
-  font-size: smaller;
+.ConnectionStatus {
+    position: absolute;
+    font-size: smaller;
 
-  background-color: rgb(57, 151, 57);
-  border-radius: 5px;
-  padding: 1px 5px;
-  place-content: center;
-  place-items: center;
-  display: flex;
+    background-color: rgb(57, 151, 57);
+    border-radius: 5px;
+    padding: 1px 5px;
+    place-content: center;
+    place-items: center;
+    display: flex;
 
-  top: -30px;
+    top: -30px;
 
-  font-weight: 500;
+    font-weight: 500;
 }
 
-.Connecting{
-  background-color: aquamarine;
+.Connecting {
+    background-color: aquamarine;
 }
-.Disconnecting{
-  background-color: gray;
+.Disconnecting {
+    background-color: gray;
 }
-.Reconnecting{
-  background-color: rgb(214, 71, 0);
+.Reconnecting {
+    background-color: rgb(214, 71, 0);
 }
-.Disconnected{
-  background-color: rgba(255, 0, 0, 0.573);
+.Disconnected {
+    background-color: rgba(255, 0, 0, 0.573);
 }
-
 
 /* CVS */
 

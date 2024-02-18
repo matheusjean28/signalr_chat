@@ -91,7 +91,7 @@ const ChatRooms = () => {
                   room.chatID);
                 }}
               >
-                JOIN
+                {">"}
               </button>
             </li>
           ))}
