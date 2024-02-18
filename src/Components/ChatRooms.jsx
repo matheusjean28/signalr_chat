@@ -3,20 +3,28 @@ import * as signalR from "@microsoft/signalr";
 import AppContext from "../Context/AppContext";
 import ProfileSettings from "./ProfileSettings";
 import "../Styles/ChatRooms.css";
-import { onJoinRoomAsyn }
-  from '../ConnectionMethods/OnConnetionCalled';
+import { onJoinRoomAsyn } from "../ConnectionMethods/OnConnetionCalled";
 
 const ChatRooms = () => {
-  const { connection,token, isInARoom, setIsInARoom, setChatName, userInfo, setCurrentChat, setConnection, currentChat } =
-    useContext(AppContext);
+  const {
+    connection,
+    token,
+    isInARoom,
+    setIsInARoom,
+    setChatName,
+    userInfo,
+    setCurrentChat,
+    setConnection,
+    currentChat,
+  } = useContext(AppContext);
   const [availableRooms, setAvailableRooms] = useState([]);
 
   connection.on("Error", (reviced) => {
-    console.log(reviced)
-  })
+    console.log(reviced);
+  });
   connection.on("JoinChat", (reviced) => {
-    console.log(reviced)
-  })
+    console.log(reviced);
+  });
 
   //try to fetch avaliable romms again until get it
   const reconnectAvaliableRooms = async (connection) => {
@@ -34,13 +42,13 @@ const ChatRooms = () => {
   useEffect(() => {
     const fetchRooms = async () => {
       try {
-        var _token = localStorage.getItem('token');
-        const response = await fetch("http://localhost:5178/GetAllRooms",{
+        var _token = localStorage.getItem("token");
+        const response = await fetch("http://localhost:5178/GetAllRooms", {
           method: "GET",
           headers: {
-            "Authorization": `Bearer ${_token}`
-          }}
-        );
+            Authorization: `Bearer ${_token}`,
+          },
+        });
         if (!response.ok) {
           throw new Error("Failed to fetch rooms");
         }
@@ -48,7 +56,7 @@ const ChatRooms = () => {
         setAvailableRooms(data);
       } catch (error) {
         console.error("Error fetching rooms:", error.message);
-        reconnectAvaliableRooms(connection)
+        reconnectAvaliableRooms(connection);
       }
     };
     fetchRooms();
@@ -60,7 +68,6 @@ const ChatRooms = () => {
         <h2>JOIN ROOM!</h2>
         <p>Choose a room and join to start a conversation!</p>
         <ul className="ChatListUl">
-
           {/* //map on each avaliable room to join */}
           {availableRooms.map((room) => (
             <li key={room.chatID} className="ChatListLi">
@@ -83,12 +90,13 @@ const ChatRooms = () => {
                   e.preventDefault();
                   setChatName(room.chatName);
                   setIsInARoom(true);
-                  setCurrentChat(room.chatID)
-
+                  setCurrentChat(room.chatID);
+                  
                   //Try to join at the room, if not allow, server return an error
                   //parms:
-                 await connection.invoke("JoinChat", userInfo.Id,
-                  room.chatID);
+                  console.log("ChatMain ", userInfo.Id);
+                  await connection.invoke("JoinChat", userInfo.Id, room.chatID);
+
                 }}
               >
                 {">"}
