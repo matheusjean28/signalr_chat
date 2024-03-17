@@ -12,6 +12,8 @@ import "../../App.css";
 import React from "react";
 
 const GlobalConteiner = ({
+  chatInformation,
+  setChatInformation,
   chatName,
   currentChat,
   setIsEditingChat,
@@ -20,6 +22,8 @@ const GlobalConteiner = ({
   return isEditingChat ? (
     <div className="MainGrid">
       <ChatConfig
+        chatInformation={chatInformation}
+        setChatInformation={setChatInformation}
         className="MainGridChatName"
         currentChat={currentChat}
         setIsEditingChat={setIsEditingChat}

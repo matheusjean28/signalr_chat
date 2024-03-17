@@ -1,11 +1,12 @@
-
 import React, { useContext, useState, useEffect } from "react";
 import AppContext from "../Context/AppContext";
 import ProfileSettings from "./ProfileSettings";
 import "../Styles/ChatRooms.css";
-import  { PlusCircle } from 'lucide-react';
+import { PlusCircle } from "lucide-react";
 const ChatRooms = () => {
   const {
+    chatInformation,
+    setChatInformation,
     connection,
     token,
     isInARoom,
@@ -42,12 +43,15 @@ const ChatRooms = () => {
     const fetchRooms = async () => {
       try {
         var _token = localStorage.getItem("token");
-        const response = await fetch('http://localhost:5178/GetAllAvaliableChats', {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${_token}`,
-          },
-        });
+        const response = await fetch(
+          "http://localhost:5178/GetAllAvaliableChats",
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${_token}`,
+            },
+          }
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch rooms");
         }
@@ -90,12 +94,12 @@ const ChatRooms = () => {
                   setChatName(room.chatName);
                   setIsInARoom(true);
                   setCurrentChat(room.chatID);
-                  
+                  setChatInformation(room);
+
                   //Try to join at the room, if not allow, server return an error
                   //parms:
-                  console.log("ChatMain ", userInfo.Id);
+                  console.log("ChatMain ", userInfo.Id, room);
                   await connection.invoke("JoinChat", userInfo.Id, room.chatID);
-
                 }}
               >
                 <PlusCircle color="white" size={15} />

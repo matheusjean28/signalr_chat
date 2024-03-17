@@ -46,6 +46,8 @@ function App() {
   const [renderError, setRenderError] = useState(false);
   const [popMessage, setPopMessage] = useState("");
 
+  const [chatInformation, setChatInformation] = useState({});
+
   useEffect(() => {
     const newConnection = new signalR.HubConnectionBuilder()
       .withUrl("http://localhost:5178/chatHub")
@@ -114,6 +116,8 @@ function App() {
     return (
       <AppContext.Provider
         value={{
+          chatInformation,
+          setChatInformation,
           stateConnection,
           setStateConnection,
           isCreatingARoom,
@@ -158,6 +162,8 @@ function App() {
               //yes
 
               <GlobalConteiner
+                chatInformation={chatInformation}
+                setChatInformation={setChatInformation}
                 chatName={chatName}
                 currentChat={currentChat}
                 setIsEditingChat={setIsEditingChat}
@@ -165,6 +171,8 @@ function App() {
               />
             ) : (
               <GlobalConteiner
+                chatInformation={chatInformation}
+                setChatInformation={setChatInformation}
                 chatName={chatName}
                 currentChat={currentChat}
                 setIsEditingChat={setIsEditingChat}

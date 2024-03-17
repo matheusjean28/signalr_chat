@@ -1,32 +1,95 @@
-.ChatConfigConteiner{
-    position: relative;
-    
-    display: flex;
-    place-content: center;
-    place-items: center;
-    background-color: rebeccapurple;
+.ChatConfigConteiner {
+  position: relative;
+
+  display: flex;
+  place-content: center;
+  place-items: center;
+  background-color: rebeccapurple;
 }
 
-.handleCloseBtn{
-    border: none;
-  background:none;
+.handleCloseBtn {
+  border: none;
+  background: none;
   gap: 5px;
-  
+
   position: absolute;
   display: flex;
 
   place-items: center;
   place-content: center;
-  
+
   top: 10px;
   height: 50px;
   margin: 0 auto;
   margin-left: 2px;
   padding: 5px;
   border-radius: 10px;
-  
+
   left: 10px;
-  
+
   font-size: 10px;
   color: #8e77a5;
+}
+
+.infoConteiner {
+  display: flex;
+  flex-direction: column;
+
+  place-content: center;
+  place-items: center;
+}
+
+.ulInfoManegers {
+  display: flex;
+
+  place-content: center;
+  place-items: center;
+
+  list-style: none;
+
+  padding: 0;
+  margin: 0;
+
+  gap: 10px;
+}
+
+.liInfoManagers {
+  display: flex;
+  flex-direction: column;
+
+  place-content: center;
+  place-items: center;
+
+  padding: 0;
+  margin: 0;
+
+  height: 70px;
+  width: 60px;
+
+  border: #401070 1px solid;
+  border-radius: 8px;
+
+  box-shadow: 1px 10px 10px rgb(34, 29, 29);
+}
+
+/* abtratic remove styles */
+.infoContent {
+  display: flex;
+
+  place-content: center;
+  place-items: center;
+
+  padding: 0;
+  margin: 0;
+}
+
+.managersName{
+font-weight: bolder;    
+}
+
+.cargo{
+    text-align: left;
+    font-style: italic;
+    font-size: 10px;
+    color: #8e77a5;
 }
