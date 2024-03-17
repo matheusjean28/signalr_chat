@@ -23,12 +23,26 @@
 }
 
 .MainGridChatName {
+  border: none;
+  background:none;
+  gap: 5px;
+  
   position: absolute;
+  display: flex;
+
+  place-items: center;
+  place-content: center;
+  
   top: 10px;
+  height: 50px;
   margin: 0 auto;
   margin-left: 2px;
-  color: #e4d7f1;
-  padding: 5px 10px;
-  width: 78%;
+  padding: 5px;
   border-radius: 10px;
+  
+  left: 10px;
+  
+  font-size: 10px;
+  color: #8e77a5;
+
 }

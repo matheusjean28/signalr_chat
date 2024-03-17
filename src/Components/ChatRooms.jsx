@@ -42,7 +42,7 @@ const ChatRooms = () => {
     const fetchRooms = async () => {
       try {
         var _token = localStorage.getItem("token");
-        const response = await fetch("http://localhost:5178/GetAllRooms", {
+        const response = await fetch('http://localhost:5178/GetAllAvaliableChats', {
           method: "GET",
           headers: {
             Authorization: `Bearer ${_token}`,
