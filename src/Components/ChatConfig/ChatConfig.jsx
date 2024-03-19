@@ -8,17 +8,26 @@ const ChatConfig = ({
     chatInformation,
     setChatInformation,
 }) => {
-    const {chatName } = chatInformation;
+    const { chatName } = chatInformation
     console.log(chatInformation)
     return (
         <div className="ChatConfigConteiner">
             {/* header button */}
             <div className="leftInfoConteiner">
-              <span className='chatNameSpan'>
-                <h4>{chatName}</h4>
-                <AtSignIcon size={12}/>
-              </span>
+                <span className="chatNameSpan">
+                    <h4>{chatName}</h4>
+                    <AtSignIcon size={12} />
+                </span>
 
+                <div className="chatDescInfo">
+                    <h5>CHAT DESCRIPTION</h5>
+                    <p>
+                        Lorem ipsum dolor, sit amet consectetur adipisicing
+                        elit. Ipsa, tempora sequi eius vel, consectetur facilis
+                        quis reiciendis temporibus itaque ab nam atque deleniti
+                        blanditiis?
+                    </p>
+                </div>
             </div>
 
             {/* card info about manager */}
@@ -35,7 +44,7 @@ const ChatConfig = ({
                         </li>
                     ))}
                 </ul>
-                <h4 className='currentUsersCards'>Current Users:</h4>
+                <h4 className="currentUsersCards">Current Users:</h4>
                 <ul className="ulInfoManegers ">
                     {Array.from({ length: 5 }).map((_, index) => (
                         <li className="liInfoManagers">

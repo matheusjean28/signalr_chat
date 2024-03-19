@@ -74,7 +74,6 @@
     box-shadow: 1px 10px 10px rgb(34, 29, 29);
 }
 
-
 /* abtratic remove styles */
 .infoContent {
     display: flex;
@@ -99,27 +98,52 @@
 
 .leftInfoConteiner {
     display: flex;
+    flex-direction: column;
     border-radius: 8px;
-    
+
     background-color: #401070;
-    box-shadow: 1px 0px 5px 0px  #350f5b;
+    box-shadow: 1px 0px 5px 0px #350f5b;
+
+    place-items: center;
+    margin: 15px;
+}
+
+.chatNameSpan {
+    margin-top: 50px;
+
+    height: 50px;
+    display: flex;
 
     place-content: center;
     place-items: center;
 
+    padding: 5px;
+    gap: 5px;
+
+    font-weight: bolder;
+}
+.chatNameSpan > * {
+    margin: 0;
+    padding: 0;
 }
 
-.chatNameSpan{
-  display: flex;
-  place-content: center;
-  place-items: center;
-  padding: 5px;
-  gap: 5px;
-  font-weight: bolder;
+.chatDescInfo {
+    margin-top: 25px;
+    width: 90%;
 
-  background-color: #350f5b;
+    display: flex;
+    flex-direction: column;
+
+    place-content: center;
+    place-items: left;
+
+    font-size: 15px;
+    gap: 8px;
+
+    text-shadow: 1px 1px 20px black;
 }
-.chatNameSpan h4, .chatNameSpan span {
-  margin: 0;
-  padding: 0;
+
+.chatDescInfo > * {
+    margin: 0;
+    padding: 0;
 }
