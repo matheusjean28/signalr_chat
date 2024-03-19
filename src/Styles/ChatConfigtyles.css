@@ -1,95 +1,125 @@
 .ChatConfigConteiner {
-  position: relative;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
 
-  display: flex;
-  place-content: center;
-  place-items: center;
-  background-color: rebeccapurple;
+    background-color: rebeccapurple;
+
+    border-radius: 8px;
 }
 
 .handleCloseBtn {
-  border: none;
-  background: none;
-  gap: 5px;
+    border: none;
+    background: none;
+    gap: 5px;
 
-  position: absolute;
-  display: flex;
+    position: absolute;
+    display: flex;
 
-  place-items: center;
-  place-content: center;
+    place-items: center;
+    place-content: center;
 
-  top: 10px;
-  height: 50px;
-  margin: 0 auto;
-  margin-left: 2px;
-  padding: 5px;
-  border-radius: 10px;
+    top: 10px;
+    height: 50px;
+    margin: 0 auto;
+    margin-left: 2px;
+    padding: 5px;
+    border-radius: 10px;
 
-  left: 10px;
+    left: 10px;
 
-  font-size: 10px;
-  color: #8e77a5;
+    font-size: 10px;
+    color: #8e77a5;
 }
 
 .infoConteiner {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    place-items: center;
 
-  place-content: center;
-  place-items: center;
+    padding: 0 15px;
 }
 
 .ulInfoManegers {
-  display: flex;
+    display: flex;
 
-  place-content: center;
-  place-items: center;
+    place-content: center;
+    place-items: center;
 
-  list-style: none;
+    list-style: none;
 
-  padding: 0;
-  margin: 0;
+    padding: 0;
+    margin: 0;
 
-  gap: 10px;
+    gap: 10px;
+
+    margin-bottom: 50px;
 }
 
 .liInfoManagers {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 
-  place-content: center;
-  place-items: center;
+    place-content: center;
+    place-items: center;
 
-  padding: 0;
-  margin: 0;
+    padding: 0;
+    margin: 0;
 
-  height: 70px;
-  width: 60px;
+    height: 70px;
+    width: 60px;
 
-  border: #401070 1px solid;
-  border-radius: 8px;
+    border: #401070 1px solid;
+    border-radius: 8px;
 
-  box-shadow: 1px 10px 10px rgb(34, 29, 29);
+    box-shadow: 1px 10px 10px rgb(34, 29, 29);
 }
+
 
 /* abtratic remove styles */
 .infoContent {
-  display: flex;
+    display: flex;
 
-  place-content: center;
-  place-items: center;
+    place-content: center;
+    place-items: center;
 
-  padding: 0;
-  margin: 0;
+    padding: 0;
+    margin: 0;
 }
 
-.managersName{
-font-weight: bolder;    
+.managersName {
+    font-weight: bolder;
 }
 
-.cargo{
+.cargo {
     text-align: left;
     font-style: italic;
     font-size: 10px;
     color: #8e77a5;
+}
+
+.leftInfoConteiner {
+    display: flex;
+    border-radius: 8px;
+    
+    background-color: #401070;
+    box-shadow: 1px 0px 5px 0px  #350f5b;
+
+    place-content: center;
+    place-items: center;
+
+}
+
+.chatNameSpan{
+  display: flex;
+  place-content: center;
+  place-items: center;
+  padding: 5px;
+  gap: 5px;
+  font-weight: bolder;
+
+  background-color: #350f5b;
+}
+.chatNameSpan h4, .chatNameSpan span {
+  margin: 0;
+  padding: 0;
 }
