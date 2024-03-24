@@ -1,5 +1,5 @@
 import '../../Styles/ChatConfigtyles.css'
-import { Bot, ImageOff, ChevronLeft, AtSignIcon } from 'lucide-react'
+import { ChevronLeft, AtSignIcon, LightbulbIcon } from 'lucide-react'
 
 const ChatConfig = ({
     currentChat,
@@ -15,8 +15,8 @@ const ChatConfig = ({
             {/* header button */}
             <div className="leftInfoConteiner">
                 <span className="chatNameSpan">
-                    <h4>{chatName}</h4>
-                    <AtSignIcon size={12} />
+                    <AtSignIcon size={13} />
+                    <h2>{chatName}</h2>
                 </span>
 
                 <div className="chatDescInfo">
@@ -27,6 +27,27 @@ const ChatConfig = ({
                         quis reiciendis temporibus itaque ab nam atque deleniti
                         blanditiis?
                     </p>
+
+                    <div className="chatCategInfo">
+                        <h5>Category's</h5>
+
+                        <ul className="ulChatCateg">
+                            <li className="liChatCateg">
+                                <p>Story</p>
+                                <LightbulbIcon size={12} />
+                            </li>
+
+                            <li className="liChatCateg">
+                                <p>Magical</p>
+                                <LightbulbIcon size={12} />
+                            </li>
+
+                            <li className="liChatCateg">
+                                <p>Random </p>
+                                <LightbulbIcon size={12} />
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
@@ -48,9 +69,7 @@ const ChatConfig = ({
                 <ul className="ulInfoManegers ">
                     {Array.from({ length: 5 }).map((_, index) => (
                         <li className="liInfoManagers">
-                            <p className="infoContent" key={index}>
-                                {}
-                            </p>
+                            <p className="infoContent" key={index}></p>
                             <p className="infoContent managersName">Matth</p>
                             <p className="infoContent cargo">manager</p>
                         </li>

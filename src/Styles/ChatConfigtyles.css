@@ -68,10 +68,10 @@
     height: 70px;
     width: 60px;
 
-    border: #401070 1px solid;
+    border: #6710bf 1px solid;
     border-radius: 8px;
 
-    box-shadow: 1px 10px 10px rgb(34, 29, 29);
+    box-shadow: 0px 1px 10px 0px rgb(34, 29, 29);
 }
 
 /* abtratic remove styles */
@@ -144,6 +144,50 @@
 }
 
 .chatDescInfo > * {
+    margin: 0;
+    padding: 0;
+}
+
+.chatCategInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+/* list of categorys related of chat */
+.ulChatCateg {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    gap: 10px;
+}
+
+.liChatCateg {
+    display: flex;
+    place-content: center;
+    place-items: center;
+    gap: 5px;
+
+    background-color: #6710bf;
+    padding: 5px;
+    margin: 0;
+
+    border-radius: 5px;
+
+    box-shadow: 0px 1px 5px 0px rgb(51, 51, 160);
+
+    font-weight: bold;
+}
+
+.liChatCateg:hover {
+    box-shadow: 0px 1px 8px 0px #8634d8;
+}
+
+.liChatCateg > * {
+    display: flex;
+    place-content: center;
+    place-items: center;
     margin: 0;
     padding: 0;
 }
