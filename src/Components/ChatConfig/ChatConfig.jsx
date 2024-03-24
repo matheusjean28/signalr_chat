@@ -1,6 +1,7 @@
 import '../../Styles/ChatConfigtyles.css'
-import { ChevronLeft, AtSignIcon, LightbulbIcon, UserPlus } from 'lucide-react'
+import { ChevronLeft, UserPlus } from 'lucide-react'
 import ConteinerLeft from './ConteinerLeft'
+import ModalAddUserManager from './ModalAddUserManager'
 
 const ChatConfig = ({
     currentChat,
@@ -13,29 +14,29 @@ const ChatConfig = ({
     console.log(chatInformation)
     return (
         <div className="ChatConfigConteiner">
+            <ModalAddUserManager />
             {/* header button */}
-           <ConteinerLeft  chatName={chatName}/>
+            <ConteinerLeft chatName={chatName} />
 
             {/* card info about manager */}
             <div className="infoConteiner">
-                <h4 >Current Users:</h4>
+                <h4>Current Users:</h4>
                 <ul className="ulInfoManegers ">
-                    {Array.from({ length: 100}).map((_, index) => (
+                    {Array.from({ length: 100 }).map((_, index) => (
                         <li className="liInfoManagers">
                             <p className="infoContent" key={index}></p>
                             <p className="infoContent managersName">Matth</p>
                             <p className="infoContent cargo">manager</p>
                             {/* check if cargo is != normaluser */}
                             <span className="addAsManeger">
-                                <UserPlus size={15}/>
+                                <UserPlus size={15} />
                             </span>
                         </li>
                     ))}
                 </ul>
             </div>
 
-            
-                    {/* button  close */}
+            {/* button  close */}
             <button
                 className="handleCloseBtn"
                 onClick={(e) => {
