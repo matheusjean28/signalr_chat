@@ -1,10 +1,14 @@
 .ChatConfigConteiner {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
 
     background-color: rebeccapurple;
 
     border-radius: 8px;
+    overflow: auto;
+}
+.ChatConfigConteiner::-webkit-scrollbar {
+    display: none;
 }
 
 .handleCloseBtn {
@@ -35,24 +39,30 @@
     display: flex;
     flex-direction: column;
     place-items: center;
+    place-content: center;
 
-    padding: 0 15px;
+    overflow: auto;
+}
+.infoConteiner::-webkit-scrollbar {
+    display: none;
 }
 
 .ulInfoManegers {
+    padding: 10px ;
     display: flex;
+    flex-wrap: wrap;
 
-    place-content: center;
-    place-items: center;
+    margin: 0;
 
     list-style: none;
 
-    padding: 0;
-    margin: 0;
-
     gap: 10px;
 
-    margin-bottom: 50px;
+    overflow: scroll;
+}
+
+.ulInfoManegers::-webkit-scrollbar {
+    display: none;
 }
 
 .liInfoManagers {
@@ -72,6 +82,26 @@
     border-radius: 8px;
 
     box-shadow: 0px 1px 10px 0px rgb(34, 29, 29);
+}
+
+.liInfoManagers:hover {
+    transition: all ease-in-out 0.5s;
+    background-color: #763bb1;
+    display: flex;
+    gap: 8px;
+
+    .cargo {
+        display: none;
+    }
+
+    .addAsManeger {
+        display: flex;
+        transition: all ease-in-out 0.5s;
+    }
+}
+
+.addAsManeger {
+    display: none;
 }
 
 /* abtratic remove styles */
